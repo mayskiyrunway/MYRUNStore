@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
 <html lang="ru" data-theme="system">
 <head>
 <meta charset="utf-8">
@@ -9,7 +24,6 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
-/* ============ ТЕМЫ ============ */
 :root{
   --bg:#ffffff; --bg-elev:#fafafa; --card:#ffffff;
   --border:#e6e6ea; --border-strong:#cfcfd6;
@@ -17,8 +31,6 @@
   --btn:#111114; --btn-hover:#2b2b33; --btn-text:#ffffff;
   --hover:rgba(0,0,0,.05); --chip:#f3f3f5;
   --shadow:0 4px 24px rgba(0,0,0,.07); --accent:#111114;
-  --pink:#ff3a8a; --pink-2:#a82568; --pink-3:#d8207a; --pink-4:#ff6fb3;
-  --green:#2ecc71;
 }
 html[data-theme="dark"]{
   --bg:#101014; --bg-elev:#15151a; --card:#1a1a20;
@@ -59,7 +71,6 @@ html{scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
 
 .app{display:flex;min-height:100vh}
 
-/* ============ САЙДБАР ============ */
 .sidebar{
   width:264px;flex:0 0 264px;position:sticky;top:0;height:100vh;
   display:flex;flex-direction:column;gap:18px;
@@ -104,7 +115,6 @@ html{scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
 .theme-switch button.active{background:var(--btn);color:var(--btn-text)}
 .copyright{font-size:11px;color:var(--text-dim);padding:0 6px;line-height:1.45}
 
-/* ============ КОНТЕНТ ============ */
 .main{flex:1;min-width:0;padding:34px 40px 80px;position:relative;overflow:hidden}
 .page{max-width:980px;animation:fade .25s ease}
 .page[hidden]{display:none}
@@ -113,7 +123,6 @@ html{scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
 .page-head h1{font-size:29px;letter-spacing:-.025em;margin:0 0 6px;font-weight:750}
 .page-head p{margin:0;color:var(--text-dim);font-size:14.5px}
 
-/* ============ БАННЕР ============ */
 .store-banner{
   width:100%;margin-bottom:24px;padding:24px;
   border-radius:20px;overflow:hidden;
@@ -149,7 +158,6 @@ html{scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
 }
 .banner-subtitle{font-size:14px;color:rgba(255,255,255,.8);line-height:1.5;margin-bottom:12px}
 
-/* ============ ПЛАШКА МБИ ============ */
 .mbi-badge{
   display:inline-flex;align-items:center;gap:10px;
   padding:8px 16px;border-radius:50px;
@@ -164,10 +172,7 @@ html{scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
 html[data-theme="dark"] .mbi-badge{
   background:#1a1a20;
   border:1px solid rgba(255,255,255,.1);
-  box-shadow:
-    0 2px 6px rgba(0,0,0,.3),
-    0 6px 16px rgba(0,0,0,.4),
-    0 12px 30px rgba(0,0,0,.5);
+  box-shadow:0 2px 6px rgba(0,0,0,.3),0 6px 16px rgba(0,0,0,.4),0 12px 30px rgba(0,0,0,.5);
 }
 .mbi-badge .mbi-text{
   font-size:13px;font-weight:700;letter-spacing:.3px;
@@ -217,36 +222,6 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
   50%{transform:scale(1.15)}
 }
 
-/* Большая плашка МБИ для страницы игры */
-.mbi-badge-lg{
-  display:inline-flex;align-items:center;gap:14px;
-  padding:12px 22px;border-radius:50px;
-  background:#ffffff;
-  border:1px solid rgba(0,0,0,.06);
-  box-shadow:
-    0 4px 10px rgba(0,0,0,.05),
-    0 10px 25px rgba(0,0,0,.08),
-    0 25px 50px rgba(0,0,0,.10);
-  margin-bottom:16px;
-}
-html[data-theme="dark"] .mbi-badge-lg{
-  background:#1a1a20;
-  border:1px solid rgba(255,255,255,.1);
-  box-shadow:0 4px 10px rgba(0,0,0,.3),0 10px 25px rgba(0,0,0,.4);
-}
-.mbi-badge-lg .mbi-text{font-size:18px;font-weight:700;letter-spacing:.5px;color:#111111;white-space:nowrap}
-html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
-.mbi-badge-lg .mbi-check-wrap{position:relative;width:34px;height:34px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.mbi-badge-lg .mbi-check-wrap::before{
-  content:"";position:absolute;inset:-5px;border-radius:50%;
-  background:radial-gradient(circle,rgba(46,204,113,.85) 0%,rgba(46,204,113,.45) 40%,rgba(46,204,113,0) 75%);
-  animation:mbi-pulse 2s ease-in-out infinite;pointer-events:none;
-}
-.mbi-badge-lg .mbi-check-svg{width:34px;height:34px;position:relative;z-index:2;filter:drop-shadow(0 0 6px rgba(46,204,113,.9))}
-.mbi-badge-lg .mbi-circle{fill:none;stroke:#2ecc71;stroke-width:3;stroke-linecap:round;stroke-dasharray:166;stroke-dashoffset:166;transform-origin:center;transform-box:fill-box;animation:mbi-draw-circle 12s cubic-bezier(.65,0,.45,1) infinite}
-.mbi-badge-lg .mbi-mark{fill:none;stroke:#2ecc71;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:48;stroke-dashoffset:48;animation:mbi-draw-check 12s cubic-bezier(.65,0,.45,1) infinite}
-
-/* ============ КАРТОЧКИ ============ */
 .card{
   background:var(--card);border:1px solid var(--border);border-radius:20px;
   padding:18px;display:flex;gap:18px;margin-bottom:18px;
@@ -312,7 +287,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 .review-text{color:var(--text-dim);font-size:14px;line-height:1.5;margin:0}
 .review-date{font-size:11px;color:var(--text-dim);margin-top:6px}
 
-/* ============ КНОПКИ ============ */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   padding:11px 22px;border-radius:12px;border:0;cursor:pointer;
@@ -328,7 +302,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 .btn-danger{background:#dc2626;color:#fff}
 .btn-danger:hover{background:#b91c1c}
 
-/* ============ КРАСИВАЯ КНОПКА СКАЧАТЬ ============ */
 .btn-download{
   position:relative;
   padding:14px 36px;
@@ -365,10 +338,7 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
   pointer-events:none;
 }
 .btn-download svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-@keyframes dl-gradient{
-  0%{background-position:0% 50%}
-  100%{background-position:300% 50%}
-}
+@keyframes dl-gradient{0%{background-position:0% 50%}100%{background-position:300% 50%}}
 @keyframes dl-pulse{
   0%,100%{
     box-shadow:
@@ -385,11 +355,7 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
       inset 0 0 22px rgba(255,255,255,.28);
   }
 }
-@keyframes dl-shine{
-  0%{left:-70%}
-  55%{left:140%}
-  100%{left:140%}
-}
+@keyframes dl-shine{0%{left:-70%}55%{left:140%}100%{left:140%}}
 
 .form-group{margin-bottom:16px}
 .form-label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text)}
@@ -402,7 +368,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 .form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--btn)}
 .form-textarea{min-height:100px;resize:vertical}
 
-/* ============ МОДАЛКИ ============ */
 .modal{
   position:fixed;inset:0;background:rgba(0,0,0,.6);
   display:flex;align-items:center;justify-content:center;
@@ -424,7 +389,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 }
 .modal-close:hover{background:var(--hover);color:var(--text)}
 
-/* ============ НОВОСТИ ============ */
 .news-intro{
   max-width:840px;margin-bottom:20px;padding:16px 18px;
   border:1px solid var(--border);border-radius:14px;
@@ -459,7 +423,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 .news-title{font-size:18px;font-weight:700;letter-spacing:-.015em;margin:0 0 10px;line-height:1.35;color:var(--text)}
 .news-text{margin:0 0 12px;color:var(--text-dim);font-size:14.5px;line-height:1.68}
 
-/* ============ ПРАВИЛА ============ */
 .prose{max-width:840px}
 .prose h2{font-size:19px;margin:34px 0 12px;letter-spacing:-.015em;padding-bottom:8px;border-bottom:1px solid var(--border)}
 .prose h2:first-of-type{margin-top:8px}
@@ -470,7 +433,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 .prose b{color:var(--text)}
 .notice{background:var(--chip);border:1px solid var(--border);border-radius:14px;padding:14px 16px;font-size:13.5px;color:var(--text-dim);line-height:1.6}
 
-/* ============ FAQ ============ */
 .faq-intro{
   max-width:840px;margin-bottom:24px;padding:18px 20px;
   border:1px solid var(--border);border-radius:16px;
@@ -505,7 +467,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 .faq-answer p:last-of-type{margin-bottom:0}
 .faq-answer b{color:var(--text);font-weight:650}
 
-/* ============ АДМИН ============ */
 .admin-section{margin-bottom:30px}
 .admin-section h3{font-size:18px;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .admin-list{display:flex;flex-direction:column;gap:8px}
@@ -536,7 +497,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 .empty-state strong{display:block;color:var(--text);font-size:16px;margin-bottom:8px}
 .empty-state span{font-size:14px}
 
-/* ============ ВЫБОР УСТРОЙСТВА ============ */
 .device-select{
   position:fixed;inset:0;z-index:9998;
   background:var(--bg);
@@ -569,7 +529,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 .device-confirm.ready{opacity:1;pointer-events:auto}
 .device-confirm.ready:hover{background:var(--btn-hover)}
 
-/* ============ ИНТРО ============ */
 #introOverlay{
   position:fixed;inset:0;z-index:10000;
   display:flex;align-items:center;justify-content:center;
@@ -616,7 +575,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 @keyframes introTextFlow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
 
-/* ============ СВАЙП-ИНДИКАТОР (мобильный) ============ */
 .swipe-hint{
   display:none;
   align-items:center;justify-content:center;gap:6px;
@@ -626,7 +584,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 }
 .swipe-hint svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 
-/* ============ АДАПТИВ ============ */
 @media (max-width:900px){
   .app{flex-direction:column}
   .sidebar{
@@ -658,16 +615,11 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
   .type-selector{flex-direction:column}
   .swipe-hint{display:flex}
   .btn-download{padding:12px 28px;font-size:14px;letter-spacing:2px}
-  .mbi-badge-lg{padding:10px 18px}
-  .mbi-badge-lg .mbi-text{font-size:15px}
-  .mbi-badge-lg .mbi-check-wrap{width:28px;height:28px}
-  .mbi-badge-lg .mbi-check-svg{width:28px;height:28px}
 }
 </style>
 </head>
 <body>
 
-<!-- ================= ИНТРО ================= -->
 <div id="introOverlay">
   <div class="logo-intro-line">
     <div class="logo-intro-wrap" id="logoIntroWrap">
@@ -704,7 +656,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
   </div>
 </div>
 
-<!-- ================= ВЫБОР УСТРОЙСТВА ================= -->
 <div class="device-select" id="deviceSelect">
   <div class="device-select-inner">
     <div class="device-logo">
@@ -733,7 +684,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 </div>
 
 <div class="app" id="app" style="display:none">
-  <!-- ================= САЙДБАР ================= -->
   <aside class="sidebar">
     <div class="brand" id="brandLogo" title="Нажмите, чтобы вернуться на главную">
       <div class="brand-logo">
@@ -745,7 +695,7 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
       </div>
     </div>
 
-    <nav class="nav" id="mainNav">
+    <nav class="nav">
       <button type="button" class="active" data-page="home">
         <svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
         Главная страница
@@ -775,10 +725,8 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
     </div>
   </aside>
 
-  <!-- ================= КОНТЕНТ ================= -->
   <main class="main" id="mainContent">
 
-    <!-- ---------- ГЛАВНАЯ ---------- -->
     <section class="page" id="page-home">
       <div class="page-head">
         <h1>Приложения</h1>
@@ -804,7 +752,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
       <div id="gamesList"></div>
     </section>
 
-    <!-- ---------- НОВОСТИ ---------- -->
     <section class="page" id="page-news" hidden>
       <div class="page-head">
         <h1>Новости</h1>
@@ -825,7 +772,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
       <div class="news-list" id="newsList"></div>
     </section>
 
-    <!-- ---------- ПРАВИЛА ---------- -->
     <section class="page" id="page-rules" hidden>
       <div class="page-head"><h1>Свод правил</h1><p>Официальный свод правил игровой платформы MAYRUN Store</p></div>
 
@@ -869,7 +815,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
       </div>
     </section>
 
-    <!-- ---------- ВОПРОС-ОТВЕТ ---------- -->
     <section class="page" id="page-faq" hidden>
       <div class="page-head"><h1>Вопрос-Ответ</h1><p>Частые вопросы о платформе, играх и безопасности</p></div>
 
@@ -930,7 +875,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
       </div>
     </section>
 
-    <!-- ---------- АДМИН ---------- -->
     <section class="page" id="page-admin" hidden>
       <div class="page-head"><h1>Админ-панель</h1><p>Управление играми, новостями и отзывами</p></div>
 
@@ -1030,7 +974,6 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
   </main>
 </div>
 
-<!-- ================= МОДАЛКИ ================= -->
 <div class="modal" id="loginModal">
   <div class="modal-content">
     <div class="modal-header">
@@ -1117,10 +1060,9 @@ html[data-theme="dark"] .mbi-badge-lg .mbi-text{color:#f3f3f5}
 </div>
 
 <script>
-/* ==================== SUPABASE ==================== */
 const SUPABASE_URL = 'https://dkyxhogfyenpkgysqukv.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_4OVOK9ac1BqXQyCJEmJzQQ_yYIBwMV8';
-const ADMIN_USER_ID = '9ad2099f-9e43-4c6e-98ad-4dec0c6ce82c';
+const ADMIN_USER_ID = 'f6ae17ca-8f5f-439f-a13d-02c4d1eb615c';
 
 let supabaseClient = null;
 try {
@@ -1135,19 +1077,7 @@ let selectedDevice = null;
 let selectedGameType = 'EXE';
 const PAGE_ORDER = ['home', 'news', 'rules', 'faq'];
 
-/* ==================== HTML ПЛАШКИ МБИ ==================== */
-function mbiBadgeHTML(large){
-  if(large){
-    return `<div class="mbi-badge-lg">
-      <span class="mbi-text">Проверено МБИ</span>
-      <div class="mbi-check-wrap">
-        <svg class="mbi-check-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
-          <circle class="mbi-circle" cx="26" cy="26" r="24"/>
-          <path class="mbi-mark" d="M14 27 l8 8 l16 -16"/>
-        </svg>
-      </div>
-    </div>`;
-  }
+function mbiBadgeHTML(){
   return `<div class="mbi-badge">
     <span class="mbi-text">Проверено МБИ</span>
     <div class="mbi-check-wrap">
@@ -1159,7 +1089,6 @@ function mbiBadgeHTML(large){
   </div>`;
 }
 
-/* ==================== ИНТРО ==================== */
 (function(){
   const overlay = document.getElementById('introOverlay');
   const wrap = document.getElementById('logoIntroWrap');
@@ -1192,7 +1121,6 @@ function mbiBadgeHTML(large){
   setTimeout(() => { overlay.style.display = 'none'; }, 2600 + 1000 + 1100 + 400);
 })();
 
-/* ==================== ВЫБОР УСТРОЙСТВА ==================== */
 function initDeviceSelect(){
   const saved = localStorage.getItem('myrun-device');
   const deviceSelect = document.getElementById('deviceSelect');
@@ -1227,7 +1155,6 @@ function initDeviceSelect(){
   });
 }
 
-/* ==================== ТЕМА ==================== */
 (function(){
   var root = document.documentElement;
   var saved = null;
@@ -1245,7 +1172,6 @@ function initDeviceSelect(){
   apply(current);
 })();
 
-/* ==================== НАВИГАЦИЯ ==================== */
 function goTo(page){
   document.querySelectorAll('.page').forEach(function(p){ p.hidden = (p.id !== 'page-' + page); });
   document.querySelectorAll('.nav button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-page') === page); });
@@ -1257,12 +1183,10 @@ function goTo(page){
   buttons.forEach(function(btn){ btn.addEventListener('click', function(){ goTo(btn.getAttribute('data-page')); }); });
 })();
 
-/* ==================== ЛОГОТИП - ВОЗВРАТ НА ГЛАВНУЮ ==================== */
 document.getElementById('brandLogo').addEventListener('click', function(){
   goTo('home');
 });
 
-/* ==================== СВАЙП ДЛЯ МОБИЛЬНЫХ ==================== */
 (function(){
   const main = document.getElementById('mainContent');
   if(!main) return;
@@ -1310,7 +1234,6 @@ document.getElementById('brandLogo').addEventListener('click', function(){
   }, {passive: true});
 })();
 
-/* ==================== FAQ ==================== */
 (function(){
   document.querySelectorAll('.faq-item').forEach(function(item){
     var q = item.querySelector('.faq-q');
@@ -1319,7 +1242,6 @@ document.getElementById('brandLogo').addEventListener('click', function(){
   });
 })();
 
-/* ==================== СЕКРЕТНЫЙ КОД 1988 ==================== */
 let secretBuffer = '';
 let secretTimer = null;
 
@@ -1336,7 +1258,6 @@ document.addEventListener('keydown', function(e){
   }
 });
 
-/* ==================== МОДАЛКИ ==================== */
 function openModal(id){
   document.getElementById(id).classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -1357,7 +1278,6 @@ document.querySelectorAll('.modal').forEach(modal => {
   });
 });
 
-/* ==================== ВХОД ==================== */
 document.getElementById('loginForm').addEventListener('submit', async function(e){
   e.preventDefault();
   if(!supabaseClient){ alert('Ошибка подключения'); return; }
@@ -1399,7 +1319,6 @@ document.getElementById('changeDeviceBtn').addEventListener('click', function(){
   location.reload();
 });
 
-/* ==================== TYPE SELECTOR ==================== */
 document.querySelectorAll('.type-selector-btn').forEach(btn => {
   btn.addEventListener('click', function(){
     document.querySelectorAll('.type-selector-btn').forEach(b => b.classList.remove('active'));
@@ -1408,7 +1327,6 @@ document.querySelectorAll('.type-selector-btn').forEach(btn => {
   });
 });
 
-/* ==================== ЗВЁЗДЫ ==================== */
 document.getElementById('starRating').addEventListener('click', function(e){
   if(e.target.classList.contains('star')){
     currentRating = parseInt(e.target.dataset.rating);
@@ -1423,7 +1341,6 @@ function updateStars(){
   });
 }
 
-/* ==================== ОТЗЫВЫ ==================== */
 function openReviewModal(gameId){
   document.getElementById('reviewGameId').value = gameId;
   currentRating = 0;
@@ -1459,7 +1376,6 @@ document.getElementById('reviewForm').addEventListener('submit', async function(
   } catch(err){ alert('Ошибка: ' + err.message); }
 });
 
-/* ==================== ИГРЫ ==================== */
 async function loadGames(){
   const list = document.getElementById('gamesList');
   if(!supabaseClient){
@@ -1529,7 +1445,7 @@ async function loadGames(){
               <div><span class="k">Версия</span><span class="v">${game.version || '—'}</span></div>
               <div><span class="k">Возраст</span><span class="v">${game.age_rating || '0+'}</span></div>
             </div>
-            ${mbiBadgeHTML(false)}
+            ${mbiBadgeHTML()}
             <div class="actions">
               <a class="btn-download" href="${game.download_url}" download>
                 <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -1551,7 +1467,6 @@ async function loadGames(){
   }
 }
 
-/* ==================== НОВОСТИ ==================== */
 async function loadNews(){
   const list = document.getElementById('newsList');
   if(!supabaseClient){ list.innerHTML = '<div class="empty-state"><strong>Ошибка</strong></div>'; return; }
@@ -1580,7 +1495,6 @@ async function loadNews(){
   }
 }
 
-/* ==================== АДМИН ==================== */
 document.getElementById('uploadGameForm').addEventListener('submit', async function(e){
   e.preventDefault();
   if(!supabaseClient){ alert('Ошибка'); return; }
@@ -1785,7 +1699,6 @@ function escapeHtml(str){
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
 }
 
-/* ==================== INIT ==================== */
 document.addEventListener('DOMContentLoaded', function(){
   initDeviceSelect();
   loadGames();
@@ -1794,3 +1707,13 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 </body>
 </html>
+
+
+              <script>
+                                 const ADMIN_USER_ID = 'f6ae17ca-8f5f-439f-a13d-02c4d1eb615c';
+   
+
+              </script>
+                        </body>
+                        </html>
+                    
