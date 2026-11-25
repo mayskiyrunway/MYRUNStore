@@ -1,19 +1,16 @@
-
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <style>
-                body {
-                  background-color: white; /* Ensure the iframe has a white background */
-                }
-
-                
-              </style>
-                        </head>
-                        <body>
-                            <!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<!DOCTYPE html>
 <html lang="ru" data-theme="system">
 <head>
 <meta charset="utf-8">
@@ -97,8 +94,19 @@ html{scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
 .nav button svg{width:17px;height:17px;flex:0 0 17px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .nav button:hover{background:var(--hover);color:var(--text)}
 .nav button.active{background:var(--btn);color:var(--btn-text)}
-.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-left:auto;flex:0 0 6px;box-shadow:0 0 8px var(--accent)}
+.nav-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent);margin-left:auto;flex:0 0 6px;
+  box-shadow:0 0 8px var(--accent);
+  display:none;
+  animation:navDotPulse 1.8s ease-in-out infinite;
+}
+.nav-dot.visible{display:inline-block}
 .nav button.active .nav-dot{background:var(--btn-text);box-shadow:0 0 8px var(--btn-text)}
+@keyframes navDotPulse{
+  0%,100%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.25);opacity:.75}
+}
 
 .sidebar-bottom{margin-top:auto;display:flex;flex-direction:column;gap:12px}
 .theme-switch{
@@ -232,6 +240,7 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
   width:126px;height:126px;flex:0 0 126px;border-radius:16px;position:relative;
   overflow:hidden;display:flex;align-items:center;justify-content:center;
   border:1px solid rgba(255,255,255,.07);
+  aspect-ratio:1/1;
   background:
     radial-gradient(circle at 22% 118%, rgba(190,18,60,.70), transparent 62%),
     radial-gradient(circle at 88% -12%, rgba(190,18,60,.30), transparent 58%),
@@ -599,11 +608,18 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
   .nav::-webkit-scrollbar{display:none}
   .nav button{white-space:nowrap;padding:8px 14px;font-size:14px}
   .nav button svg{display:none}
-  .nav-dot{display:none}
+  .nav-dot{display:none !important}
+  .nav-dot.visible{display:inline-block !important}
   .main{padding:22px 14px 60px}
   .page-head h1{font-size:23px}
   .card{flex-direction:column;gap:14px;padding:16px}
-  .cover{width:100%;height:132px;flex:none;border-radius:14px}
+  .cover{
+    width:100%;height:auto;flex:none;
+    aspect-ratio:1/1;
+    max-width:260px;
+    margin:0 auto;
+    border-radius:18px;
+  }
   .store-banner{flex-direction:column;text-align:center;padding:20px;gap:16px}
   .banner-logo{width:64px;height:64px}
   .banner-title{font-size:20px}
@@ -703,7 +719,7 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
       <button type="button" data-page="news">
         <svg viewBox="0 0 24 24"><path d="M4 5h13v16H4z"/><path d="M17 5l3 3v11a2 2 0 0 1-2 2"/><path d="M7 9h7M7 13h7M7 17h4"/></svg>
         Новости
-        <span class="nav-dot" aria-hidden="true"></span>
+        <span class="nav-dot" id="newsDot" aria-hidden="true"></span>
       </button>
       <button type="button" data-page="rules">
         <svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h7M9 17h7"/></svg>
@@ -1062,7 +1078,7 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
 <script>
 const SUPABASE_URL = 'https://dkyxhogfyenpkgysqukv.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_4OVOK9ac1BqXQyCJEmJzQQ_yYIBwMV8';
-const ADMIN_USER_ID = '560c3691-7865-4e47-96cf-13cdf92ec5d6';
+const ADMIN_USER_ID = 'f6ae17ca-8f5f-439f-a13d-02c4d1eb615c';
 
 let supabaseClient = null;
 try {
@@ -1172,10 +1188,59 @@ function initDeviceSelect(){
   apply(current);
 })();
 
+function updateNewsDot(hasNew){
+  const dot = document.getElementById('newsDot');
+  if(!dot) return;
+  if(hasNew){
+    dot.classList.add('visible');
+  } else {
+    dot.classList.remove('visible');
+  }
+}
+
+function markNewsAsViewed(){
+  try {
+    localStorage.setItem('myrun-last-news-viewed', new Date().toISOString());
+  } catch(e){}
+  updateNewsDot(false);
+}
+
+function checkForNewNews(newsItems){
+  if(!newsItems || newsItems.length === 0){
+    updateNewsDot(false);
+    return;
+  }
+  let lastViewed = null;
+  try {
+    lastViewed = localStorage.getItem('myrun-last-news-viewed');
+  } catch(e){}
+  
+  if(!lastViewed){
+    // Первый запуск — считаем, что всё просмотрено, точку не показываем
+    try {
+      const latestDate = newsItems.reduce((max, n) => {
+        const d = new Date(n.created_at).getTime();
+        return d > max ? d : max;
+      }, 0);
+      if(latestDate) localStorage.setItem('myrun-last-news-viewed', new Date(latestDate).toISOString());
+    } catch(e){}
+    updateNewsDot(false);
+    return;
+  }
+  
+  const lastViewedTime = new Date(lastViewed).getTime();
+  const hasNew = newsItems.some(n => new Date(n.created_at).getTime() > lastViewedTime);
+  updateNewsDot(hasNew);
+}
+
 function goTo(page){
   document.querySelectorAll('.page').forEach(function(p){ p.hidden = (p.id !== 'page-' + page); });
   document.querySelectorAll('.nav button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-page') === page); });
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  if(page === 'news'){
+    markNewsAsViewed();
+  }
 }
 
 (function(){
@@ -1475,6 +1540,8 @@ async function loadNews(){
     const { data: news, error } = await supabaseClient.from('news').select('*').order('created_at', { ascending: false });
     if(error) throw error;
     
+    checkForNewNews(news);
+    
     if(!news || news.length === 0){
       list.innerHTML = '<div class="empty-state"><strong>Пока нет новостей</strong><span>Следите за обновлениями!</span></div>';
       return;
@@ -1708,12 +1775,8 @@ document.addEventListener('DOMContentLoaded', function(){
 </body>
 </html>
 
-
-              <script>
-                                 const ADMIN_USER_ID = '560c3691-7865-4e47-96cf-13cdf92ec5d6';
-   
-
-              </script>
-                        </body>
-                        </html>
-                    
+<script>
+  const ADMIN_USER_ID = 'f6ae17ca-8f5f-439f-a13d-02c4d1eb615c';
+</script>
+</body>
+</html>
