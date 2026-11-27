@@ -142,11 +142,21 @@ html{scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
   border:1px solid rgba(255,255,255,.1);
   box-shadow:0 8px 32px rgba(0,0,0,.3);
   position:relative;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
 }
-.store-banner::before{
+.store-banner.has-bg::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(15,8,12,.85) 0%,rgba(15,8,12,.55) 60%,rgba(15,8,12,.3) 100%);
+  z-index:0;
+}
+.store-banner > *{position:relative;z-index:1}
+.store-banner::after{
   content:'';position:absolute;inset:0;
   background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 4px);
   pointer-events:none;
+  z-index:1;
 }
 .banner-logo{
   width:80px;height:80px;flex-shrink:0;
@@ -155,16 +165,66 @@ html{scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border:2px solid rgba(255,255,255,.2);
   box-shadow:0 4px 20px rgba(190,18,60,.5);
-  position:relative;z-index:1;
 }
 .banner-logo img{width:100%;height:100%;object-fit:cover}
-.banner-content{flex:1;position:relative;z-index:1}
+.banner-content{flex:1}
 .banner-title{
   font-size:24px;font-weight:800;letter-spacing:-.02em;
   margin-bottom:6px;color:#fff;
   text-shadow:0 0 20px rgba(190,18,60,.6);
 }
 .banner-subtitle{font-size:14px;color:rgba(255,255,255,.8);line-height:1.5;margin-bottom:12px}
+
+.vk-channel-block{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 22px;margin-bottom:24px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  transition:border-color .2s,box-shadow .2s,background-color .25s;
+  text-decoration:none;
+  color:inherit;
+}
+.vk-channel-block:hover{
+  border-color:var(--border-strong);
+  box-shadow:var(--shadow);
+  transform:translateY(-1px);
+  transition:all .2s;
+}
+.vk-channel-icon{
+  width:52px;height:52px;flex-shrink:0;
+  border-radius:14px;
+  background:linear-gradient(135deg,#0077FF,#0055CC);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(0,119,255,.35);
+}
+.vk-channel-icon svg{width:28px;height:28px;fill:#fff}
+.vk-channel-content{flex:1;min-width:0}
+.vk-channel-title{
+  font-size:16px;font-weight:700;letter-spacing:-.01em;
+  margin-bottom:3px;color:var(--text);
+}
+.vk-channel-desc{
+  font-size:13px;color:var(--text-dim);line-height:1.5;
+  margin:0;
+}
+.vk-channel-btn{
+  flex-shrink:0;
+  padding:9px 18px;
+  background:#0077FF;
+  color:#fff;
+  border-radius:10px;
+  font-size:13px;
+  font-weight:650;
+  letter-spacing:.02em;
+  border:0;
+  cursor:pointer;
+  transition:background-color .18s,transform .1s;
+  white-space:nowrap;
+}
+.vk-channel-block:hover .vk-channel-btn{
+  background:#0066DD;
+}
 
 .mbi-badge{
   display:inline-flex;align-items:center;gap:10px;
@@ -441,6 +501,62 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
 .prose li{margin-bottom:4px}
 .prose b{color:var(--text)}
 .notice{background:var(--chip);border:1px solid var(--border);border-radius:14px;padding:14px 16px;font-size:13.5px;color:var(--text-dim);line-height:1.6}
+.prose .deprecated{
+  color:#dc2626;
+  background:rgba(220,38,38,.08);
+  border-left:3px solid #dc2626;
+  padding:10px 14px;
+  border-radius:8px;
+  margin:10px 0;
+  font-weight:500;
+  position:relative;
+}
+html[data-theme="dark"] .prose .deprecated{
+  color:#ff6b8a;
+  background:rgba(220,38,38,.15);
+  border-left-color:#ff3b6b;
+}
+.prose .deprecated::before{
+  content:"⚠";
+  margin-right:8px;
+  font-weight:900;
+}
+.prose .deprecated strong{color:#dc2626;font-weight:700}
+html[data-theme="dark"] .prose .deprecated strong{color:#ff6b8a}
+
+.prose .author-legacy{
+  position:relative;
+  padding:10px 14px 10px 18px;
+  margin:6px 0;
+  background:rgba(220,38,38,.04);
+  border-left:3px solid rgba(220,38,38,.55);
+  border-radius:0 8px 8px 0;
+  color:var(--text-dim);
+  transition:background-color .2s,border-color .2s;
+}
+.prose .author-legacy::after{
+  content:"для сторонних авторов";
+  position:absolute;
+  top:8px;right:10px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:#dc2626;
+  background:rgba(220,38,38,.1);
+  border:1px solid rgba(220,38,38,.25);
+  padding:2px 8px;
+  border-radius:999px;
+}
+html[data-theme="dark"] .prose .author-legacy::after{
+  color:#ff6b8a;
+  background:rgba(255,59,107,.12);
+  border-color:rgba(255,59,107,.3);
+}
+html[data-theme="dark"] .prose .author-legacy{
+  background:rgba(220,38,38,.08);
+  border-left-color:rgba(255,59,107,.5);
+}
 
 .faq-intro{
   max-width:840px;margin-bottom:24px;padding:18px 20px;
@@ -476,6 +592,232 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
 .faq-answer p:last-of-type{margin-bottom:0}
 .faq-answer b{color:var(--text);font-weight:650}
 
+.why-section{max-width:840px}
+.why-block{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px 24px;
+  margin-bottom:18px;
+  transition:border-color .2s,box-shadow .2s,background-color .25s;
+}
+.why-block:hover{border-color:var(--border-strong);box-shadow:var(--shadow)}
+.why-block h2{
+  font-size:18px;
+  margin:0 0 14px;
+  letter-spacing:-.015em;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.why-block h2 .why-icon{
+  width:32px;
+  height:32px;
+  border-radius:8px;
+  background:var(--chip);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  flex-shrink:0;
+}
+.why-block p{margin:0 0 10px;color:var(--text-dim);font-size:14.5px;line-height:1.68}
+.why-block p:last-child{margin-bottom:0}
+.why-block ul{margin:0 0 12px;padding-left:20px;color:var(--text-dim);font-size:14.5px;line-height:1.68}
+.why-block li{margin-bottom:6px}
+.why-block code{
+  background:var(--chip);
+  padding:2px 6px;
+  border-radius:6px;
+  font-size:13px;
+  font-family:'SF Mono',Consolas,monospace;
+  color:var(--text);
+  border:1px solid var(--border);
+}
+.why-block .format-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:12px;
+  margin:14px 0;
+}
+.why-block .format-card{
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px;
+}
+.why-block .format-card h3{
+  margin:0 0 8px;
+  font-size:15px;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.why-block .format-card p{
+  margin:0;
+  font-size:13.5px;
+  color:var(--text-dim);
+  line-height:1.5;
+}
+.why-block .format-card .ext{
+  display:inline-block;
+  background:var(--btn);
+  color:var(--btn-text);
+  padding:2px 8px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.05em;
+}
+.why-block .info-callout{
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  border-left:3px solid var(--btn);
+  border-radius:10px;
+  padding:12px 14px;
+  margin:12px 0;
+  font-size:14px;
+  color:var(--text-dim);
+  line-height:1.6;
+}
+.why-block .info-callout b{color:var(--text)}
+.why-block .example-box{
+  background:var(--chip);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 14px;
+  margin:10px 0;
+  font-family:'SF Mono',Consolas,monospace;
+  font-size:13px;
+  color:var(--text);
+  overflow-x:auto;
+}
+
+.disclaimer-box{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  padding:16px 18px;
+  margin-bottom:22px;
+  background:
+    linear-gradient(135deg, rgba(234,179,8,.08), rgba(234,179,8,.02));
+  border:1px solid rgba(234,179,8,.35);
+  border-left:4px solid #eab308;
+  border-radius:14px;
+  color:var(--text-dim);
+  font-size:13.5px;
+  line-height:1.6;
+}
+html[data-theme="dark"] .disclaimer-box{
+  background:linear-gradient(135deg, rgba(234,179,8,.12), rgba(234,179,8,.04));
+  border-color:rgba(234,179,8,.3);
+}
+.disclaimer-box .disclaimer-icon{
+  flex-shrink:0;
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  background:rgba(234,179,8,.15);
+  border:1px solid rgba(234,179,8,.35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:900;
+  color:#ca8a04;
+}
+html[data-theme="dark"] .disclaimer-box .disclaimer-icon{
+  background:rgba(234,179,8,.18);
+  color:#fbbf24;
+}
+.disclaimer-box .disclaimer-content{flex:1;min-width:0}
+.disclaimer-box .disclaimer-title{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:#a16207;
+  margin-bottom:4px;
+}
+html[data-theme="dark"] .disclaimer-box .disclaimer-title{
+  color:#fbbf24;
+}
+.disclaimer-box b{color:var(--text)}
+
+.marketplace-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+  margin:14px 0;
+}
+.marketplace-card{
+  background:var(--bg-elev);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  transition:border-color .2s,transform .2s;
+}
+.marketplace-card:hover{
+  border-color:var(--border-strong);
+  transform:translateY(-2px);
+}
+.marketplace-card .mp-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+.marketplace-card .mp-logo{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:800;
+  color:#fff;
+  flex-shrink:0;
+}
+.marketplace-card .mp-name{
+  font-size:15px;
+  font-weight:700;
+  color:var(--text);
+  letter-spacing:-.01em;
+}
+.marketplace-card .mp-type{
+  font-size:11px;
+  color:var(--text-dim);
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.marketplace-card p{
+  margin:0;
+  font-size:13px;
+  color:var(--text-dim);
+  line-height:1.55;
+}
+.marketplace-card .mp-platforms{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.marketplace-card .mp-platforms span{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:6px;
+  background:var(--chip);
+  color:var(--text-dim);
+  border:1px solid var(--border);
+}
+
 .admin-section{margin-bottom:30px}
 .admin-section h3{font-size:18px;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .admin-list{display:flex;flex-direction:column;gap:8px}
@@ -488,6 +830,36 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
 .admin-item .title{font-weight:600;font-size:14px;margin-bottom:2px}
 .admin-item .meta{font-size:12px;color:var(--text-dim)}
 .admin-item .actions{display:flex;gap:6px;flex-shrink:0}
+
+.banner-preview{
+  width:100%;
+  height:140px;
+  border-radius:14px;
+  overflow:hidden;
+  margin-bottom:14px;
+  border:1px solid var(--border);
+  background:
+    radial-gradient(circle at 20% 50%, rgba(190,18,60,.35), transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(190,18,60,.15), transparent 50%),
+    linear-gradient(160deg,#1f1219 0%,#0a080b 100%);
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  padding:0 20px;
+  position:relative;
+}
+.banner-preview.has-bg::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(15,8,12,.85) 0%,rgba(15,8,12,.3) 100%);
+}
+.banner-preview-text{
+  position:relative;z-index:1;
+  color:#fff;
+  font-weight:800;
+  font-size:18px;
+  text-shadow:0 2px 10px rgba(0,0,0,.5);
+}
 
 .type-selector{display:flex;gap:8px;margin-bottom:20px}
 .type-selector-btn{
@@ -623,6 +995,8 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
   .store-banner{flex-direction:column;text-align:center;padding:20px;gap:16px}
   .banner-logo{width:64px;height:64px}
   .banner-title{font-size:20px}
+  .vk-channel-block{flex-direction:column;text-align:center;padding:16px}
+  .vk-channel-btn{width:100%}
   .faq-q{font-size:14.5px;padding:16px 16px}
   .faq-answer{margin:0 10px 12px;padding:14px 14px 12px}
   .news-item{padding:18px 18px 18px 22px}
@@ -631,6 +1005,15 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
   .type-selector{flex-direction:column}
   .swipe-hint{display:flex}
   .btn-download{padding:12px 28px;font-size:14px;letter-spacing:2px}
+  .why-block{padding:18px 20px}
+  .why-block h2{font-size:17px}
+  .why-block .format-grid{grid-template-columns:1fr}
+  .marketplace-grid{grid-template-columns:1fr}
+  .prose .author-legacy::after{
+    position:static;
+    display:inline-block;
+    margin-top:6px;
+  }
 }
 </style>
 </head>
@@ -721,6 +1104,10 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
         Новости
         <span class="nav-dot" id="newsDot" aria-hidden="true"></span>
       </button>
+      <button type="button" data-page="why">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5"/><path d="M12 17.5v.1"/></svg>
+        Зачем?
+      </button>
       <button type="button" data-page="rules">
         <svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h7M9 17h7"/></svg>
         Правила
@@ -749,7 +1136,7 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
         <p>Официальные игры и приложения от игровой студии MYRUNPLAY&gt;_</p>
       </div>
 
-      <div class="store-banner">
+      <div class="store-banner" id="storeBanner">
         <div class="banner-logo">
           <img src="https://raw.githubusercontent.com/balovzena9-ops/Logo-MayRun-Store-/main/Logo/logo.myrunstore.png" alt="MYRUN Store">
         </div>
@@ -758,6 +1145,19 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
           <p class="banner-subtitle">Официальный магазин игр от студии MYRUNPLAY&gt;_</p>
         </div>
       </div>
+
+      <a class="vk-channel-block" href="https://vk.ru/myrunplay#section=wall" target="_blank" rel="noopener noreferrer">
+        <div class="vk-channel-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.5 7.5c.2-.5 0-1-.8-1h-2.6c-.7 0-1 .4-1.2.9 0 0-1.3 3.2-3.2 5.3-.6.6-.9.8-1.2.8-.2 0-.4-.2-.4-.8V7.5c0-.7-.2-1-.8-1H8.1c-.5 0-.8.3-.8.6 0 .7 1 1 1.1 2.9v4.2c0 .9-.2 1.1-.6 1.1-1.1 0-3.8-4.1-5.4-8.8-.3-.9-.6-1-1.3-1H.5c-.7 0-.9.3-.9.7 0 .7 1 4.5 4.5 9.4C6.5 19 10 20.5 13 20.5c1.8 0 2-.4 2-1.1v-2.5c0-.7.1-.8.6-.8.4 0 1 .2 2.5 1.6 1.7 1.7 2 2.5 3 2.5h2.6c.7 0 1.1-.4.9-1.1-.2-.6-1.3-1.9-2.6-3.3-.7-.8-1.7-1.7-2-2.1-.4-.5-.3-.8 0-1.3 0 0 3.4-4.8 3.8-6.4z"/>
+          </svg>
+        </div>
+        <div class="vk-channel-content">
+          <div class="vk-channel-title">Официальное сообщество MYRUNPLAY&gt;_</div>
+          <p class="vk-channel-desc">Подпишитесь на наше сообщество ВКонтакте, чтобы первыми узнавать о релизах, обновлениях и новостях студии. Оперативная связь с командой разработки и модерации.</p>
+        </div>
+        <div class="vk-channel-btn">Перейти →</div>
+      </a>
 
       <div class="swipe-hint">
         <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
@@ -788,6 +1188,430 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
       <div class="news-list" id="newsList"></div>
     </section>
 
+    <section class="page" id="page-why" hidden>
+      <div class="page-head">
+        <h1>Зачем?</h1>
+        <p>Полное руководство для начинающих разработчиков: всё, что нужно знать о файлах, форматах, маркетплейсах и публикации игр</p>
+      </div>
+
+      <div class="swipe-hint">
+        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        <span>Листайте вбок для перехода между разделами</span>
+        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+
+      <div class="why-section">
+
+        <div class="disclaimer-box">
+          <div class="disclaimer-icon">ℹ</div>
+          <div class="disclaimer-content">
+            <div class="disclaimer-title">Официальное уведомление</div>
+            <p style="margin:0">Настоящий раздел носит <b>исключительно ознакомительный и образовательный характер</b> и предназначен для обучения начинающих разработчиков основам игровой индустрии, форматам файлов и принципам работы цифровых платформ дистрибуции. Упоминание наименований сторонних сервисов, торговых марок и цифровых магазинов не является рекламой, а приведено исключительно в информационно-справочных целях. Все права на упомянутые торговые марки принадлежат их законным правообладателям.</p>
+          </div>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">📦</span> Зачем нужны файлы игр?</h2>
+          <p>Любая игра — это набор файлов, которые компьютер или телефон умеет запускать. Чтобы игрок мог скачать и запустить вашу игру, её нужно собрать в <b>исполняемый файл</b> — готовый продукт, который содержит весь код, графику, звуки и ресурсы.</p>
+          <p>Без такого файла игру невозможно установить и запустить — это как книга без страниц: название есть, а прочитать нечего.</p>
+          <div class="info-callout">
+            <b>Простыми словами:</b> файл игры — это «коробка», в которой лежит всё, что нужно для запуска: движок, код, картинки, музыка, уровни.
+          </div>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">💾</span> Форматы файлов: APK, EXE и другие</h2>
+          <p>Для каждой операционной системы существует свой формат файла. Нельзя запустить файл от Windows на телефоне и наоборот — системы «говорят на разных языках».</p>
+          <div class="format-grid">
+            <div class="format-card">
+              <h3><span class="ext">APK</span> Android</h3>
+              <p>Формат для телефонов и планшетов на Android. Расширение файла: <code>.apk</code>. Устанавливается через «установщик пакетов» системы.</p>
+            </div>
+            <div class="format-card">
+              <h3><span class="ext">EXE</span> Windows</h3>
+              <p>Классический формат для ПК на Windows. Расширение: <code>.exe</code>. Запускается двойным кликом, часто содержит установщик.</p>
+            </div>
+            <div class="format-card">
+              <h3><span class="ext">DMG / APP</span> macOS</h3>
+              <p>Формат для компьютеров Apple. <code>.dmg</code> — образ диска с установщиком, <code>.app</code> — готовое приложение.</p>
+            </div>
+          </div>
+          <div class="info-callout">
+            <b>Важно для новичка:</b> выбирайте формат в зависимости от того, на какой системе будет запускаться игра. Если игра для телефона — нужен APK, если для ПК — EXE.
+          </div>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">🏪</span> Что такое маркетплейсы и магазины игр?</h2>
+          <p><b>Маркетплейс (цифровой магазин)</b> — это онлайн-платформа, через которую разработчики распространяют свои игры и приложения, а пользователи их скачивают. Маркетплейс берёт на себя проверку файлов, размещение в каталоге, оплату (если есть) и доставку файла игроку.</p>
+          <p>Без маркетплейса разработчику пришлось бы самому размещать файлы на сайте, принимать платежи, решать вопросы с безопасностью и поддержкой. Маркетплейс — это готовая инфраструктура.</p>
+          <p><b>Зачем они нужны:</b></p>
+          <ul>
+            <li>Игроки получают безопасное место для скачивания проверенных игр</li>
+            <li>Разработчики получают готовую аудиторию и инструменты распространения</li>
+            <li>Маркетплейс обеспечивает модерацию, защиту от вирусов и соблюдение законов</li>
+            <li>Упрощается процесс обновлений — игрок получает новую версию автоматически</li>
+          </ul>
+
+          <h3 style="font-size:16px;margin:20px 0 14px;color:var(--text);font-weight:700">Мировые маркетплейсы</h3>
+          <div class="marketplace-grid">
+            <div class="marketplace-card">
+              <div class="mp-head">
+                <div class="mp-logo" style="background:linear-gradient(135deg,#34A853,#0F9D58)">▶</div>
+                <div>
+                  <div class="mp-name">Google Play</div>
+                  <div class="mp-type">Маркетплейс Google</div>
+                </div>
+              </div>
+              <p>Крупнейший магазин приложений для Android. Более 3 млрд устройств. Публикация через Google Play Console, обязательна регистрация разработчика (единоразовый взнос $25).</p>
+              <div class="mp-platforms"><span>Android</span></div>
+            </div>
+            <div class="marketplace-card">
+              <div class="mp-head">
+                <div class="mp-logo" style="background:linear-gradient(135deg,#007AFF,#0051D5)"></div>
+                <div>
+                  <div class="mp-name">App Store</div>
+                  <div class="mp-type">Маркетплейс Apple</div>
+                </div>
+              </div>
+              <p>Единственный официальный магазин приложений для iOS и macOS. Очень строгая модерация. Для публикации нужна подписка Apple Developer Program ($99/год).</p>
+              <div class="mp-platforms"><span>iOS</span><span>macOS</span></div>
+            </div>
+            <div class="marketplace-card">
+              <div class="mp-head">
+                <div class="mp-logo" style="background:linear-gradient(135deg,#1428A0,#0B1A6B)">S</div>
+                <div>
+                  <div class="mp-name">Galaxy Store</div>
+                  <div class="mp-type">Маркетплейс Samsung</div>
+                </div>
+              </div>
+              <p>Фирменный магазин Samsung для устройств Galaxy. Альтернатива Google Play для владельцев техники Samsung. Меньше конкуренции, но и аудитория ограничена.</p>
+              <div class="mp-platforms"><span>Android</span></div>
+            </div>
+            <div class="marketplace-card">
+              <div class="mp-head">
+                <div class="mp-logo" style="background:linear-gradient(135deg,#000,#333)">E</div>
+                <div>
+                  <div class="mp-name">Epic Games Store</div>
+                  <div class="mp-type">Маркетплейс Epic Games</div>
+                </div>
+              </div>
+              <p>Крупный магазин ПК-игр от создателей Fortnite и Unreal Engine. Известен выгодными условиями для разработчиков (доля Epic — всего 12%, против 30% у Steam).</p>
+              <div class="mp-platforms"><span>Windows</span><span>macOS</span></div>
+            </div>
+            <div class="marketplace-card">
+              <div class="mp-head">
+                <div class="mp-logo" style="background:linear-gradient(135deg,#1b2838,#2a475e)">S</div>
+                <div>
+                  <div class="mp-name">Steam</div>
+                  <div class="mp-type">Маркетплейс Valve</div>
+                </div>
+              </div>
+              <p>Крупнейшая мировая платформа для ПК-игр. Более 130 млн активных пользователей. Публикация платная (взнос $100 за приложение), но окупается за счёт аудитории.</p>
+              <div class="mp-platforms"><span>Windows</span><span>macOS</span><span>Linux</span></div>
+            </div>
+            <div class="marketplace-card">
+              <div class="mp-head">
+                <div class="mp-logo" style="background:linear-gradient(135deg,#FF7A00,#FF4500)">i</div>
+                <div>
+                  <div class="mp-name">itch.io</div>
+                  <div class="mp-type">Инди-платформа</div>
+                </div>
+              </div>
+              <p>Популярная платформа для инди-разработчиков. Бесплатная публикация, можно устанавливать свою цену или делать игры бесплатными. Идеально для новичков и экспериментов.</p>
+              <div class="mp-platforms"><span>Windows</span><span>macOS</span><span>Linux</span><span>Android</span><span>Web</span></div>
+            </div>
+          </div>
+
+          <h3 style="font-size:16px;margin:24px 0 14px;color:var(--text);font-weight:700">Отечественные маркетплейсы</h3>
+          <p>После ухода ряда зарубежных сервисов из России активно развиваются отечественные платформы дистрибуции. Они соответствуют российскому законодательству и принимают платежи в рублях.</p>
+          <div class="marketplace-grid">
+            <div class="marketplace-card">
+              <div class="mp-head">
+                <div class="mp-logo" style="background:linear-gradient(135deg,#FF4775,#D81B4F)">R</div>
+                <div>
+                  <div class="mp-name">RuStore</div>
+                  <div class="mp-type">Российский маркетплейс</div>
+                </div>
+              </div>
+              <p>Официальный российский магазин приложений от «СберБанка» и РФИЦ. Установлен на большинстве новых Android-смартфонов в России. Соответствует 152-ФЗ о персональных данных.</p>
+              <div class="mp-platforms"><span>Android</span></div>
+            </div>
+            <div class="marketplace-card">
+              <div class="mp-head">
+                <div class="mp-logo" style="background:linear-gradient(135deg,#7B2FF7,#4A00B0)">N</div>
+                <div>
+                  <div class="mp-name">NashStore</div>
+                  <div class="mp-type">Российский маркетплейс</div>
+                </div>
+              </div>
+              <p>Российская платформа для распространения мобильных приложений и игр. Ориентирована на поддержку отечественных разработчиков, упрощённая модерация.</p>
+              <div class="mp-platforms"><span>Android</span></div>
+            </div>
+            <div class="marketplace-card">
+              <div class="mp-head">
+                <div class="mp-logo" style="background:linear-gradient(135deg,#0077FF,#0055CC)">VK</div>
+                <div>
+                  <div class="mp-name">VK Play</div>
+                  <div class="mp-type">Игровая платформа VK</div>
+                </div>
+              </div>
+              <p>Российская игровая платформа от VK для ПК. Включает магазин игр, лаунчер и сервис подписки VK Play Multi. Поддерживает российских разработчиков.</p>
+              <div class="mp-platforms"><span>Windows</span><span>macOS</span></div>
+            </div>
+            <div class="marketplace-card">
+              <div class="mp-head">
+                <div class="mp-logo" style="background:linear-gradient(135deg,#FF3333,#CC0000)">Я</div>
+                <div>
+                  <div class="mp-name">Яндекс Игры</div>
+                  <div class="mp-type">Платформа Яндекс</div>
+                </div>
+              </div>
+              <p>Сервис Яндекс для браузерных и мобильных игр. Ориентирован на казуальные и гиперказуальные проекты. Удобная монетизация через рекламу.</p>
+              <div class="mp-platforms"><span>Android</span><span>Web</span></div>
+            </div>
+            <div class="marketplace-card">
+              <div class="mp-head">
+                <div class="mp-logo" style="background:linear-gradient(135deg,#FF6B00,#CC5500)">M</div>
+                <div>
+                  <div class="mp-name">MYRUN Store</div>
+                  <div class="mp-type">Наш маркетплейс</div>
+                </div>
+              </div>
+              <p>Официальный цифровой маркетплейс игровой студии MYRUNPLAY&gt;_ при поддержке холдинга «Mayskiy Runway». Распространение игр в форматах APK и EXE с тщательной модерацией.</p>
+              <div class="mp-platforms"><span>Android</span><span>Windows</span></div>
+            </div>
+          </div>
+          <div class="info-callout">
+            <b>Важно понимать:</b> каждый маркетплейс имеет свои правила публикации, требования к файлам и комиссии. Перед публикацией обязательно изучите документацию выбранной платформы.
+          </div>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">📏</span> Зачем указывать размер файла?</h2>
+          <p>Размер файла — это количество места, которое игра займёт на устройстве игрока. Измеряется в мегабайтах (МБ) или гигабайтах (ГБ).</p>
+          <p><b>Зачем это нужно:</b></p>
+          <ul>
+            <li>Игрок заранее понимает, хватит ли у него свободного места</li>
+            <li>Помогает оценить, сколько времени займёт скачивание (особенно важно при медленном интернете)</li>
+            <li>Позволяет сравнивать игры между собой</li>
+            <li>Нужен для корректной работы магазина и статистики</li>
+          </ul>
+          <div class="example-box">
+            Примеры: <code>85 МБ</code> · <code>320 МБ</code> · <code>1.2 ГБ</code> · <code>3.5 ГБ</code>
+          </div>
+          <p>Небольшие инди-игры обычно весят от 20 до 500 МБ. Крупные проекты с 3D-графикой — от 1 до 20 ГБ и больше.</p>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">🆔</span> Паспорт игры (Package Name)</h2>
+          <p>Паспорт игры — это её <b>уникальный технический идентификатор</b>. Он нужен, чтобы система могла отличить одну игру от другой, даже если названия похожи.</p>
+          <p><b>Формат:</b> <code>com.название_компании.название_игры</code></p>
+          <div class="example-box">
+com.mycompany.superplatformer<br>
+com.ivanov.horror.game<br>
+com.studio.puzzle.adventure
+          </div>
+          <p><b>Зачем нужен паспорт:</b></p>
+          <ul>
+            <li><b>Уникальность:</b> две игры не могут иметь одинаковый паспорт — это как паспортные данные у людей</li>
+            <li><b>Обновления:</b> система понимает, что новая версия относится к той же игре</li>
+            <li><b>Сохранения:</b> прогресс игрока привязывается именно к паспорту</li>
+            <li><b>Защита от подделок:</b> никто не сможет выпустить «копию» вашей игры с тем же именем</li>
+          </ul>
+          <div class="info-callout">
+            <b>Правила именования:</b> только латинские буквы в нижнем регистре, точки как разделители, без пробелов и спецсимволов. Начинайте с домена (например, <code>com.</code>).
+          </div>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">🔢</span> Зачем нужна версия игры?</h2>
+          <p>Версия — это номер, который показывает, какая по счёту сборка игры выпущена. Она помогает разработчику и игрокам понимать, что именно установлено.</p>
+          <p><b>Стандартный формат:</b> <code>MAJOR.MINOR.PATCH</code></p>
+          <ul>
+            <li><b>MAJOR</b> (1.0.0 → 2.0.0) — крупные изменения, новые механики, несовместимые обновления</li>
+            <li><b>MINOR</b> (1.0.0 → 1.1.0) — новые функции, уровни, персонажи</li>
+            <li><b>PATCH</b> (1.0.0 → 1.0.1) — исправление ошибок, мелкие улучшения</li>
+          </ul>
+          <div class="example-box">
+1.0.0 — первый релиз<br>
+1.0.1 — исправлен баг с сохранением<br>
+1.1.0 — добавлен новый уровень<br>
+2.0.0 — крупное обновление с новой механикой
+          </div>
+          <p>Без версии невозможно понять, установлена ли у игрока последняя сборка, и какие изменения в ней появились.</p>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">📝</span> Что такое Changelog (список изменений)?</h2>
+          <p>Changelog — это краткий список того, что изменилось в новой версии игры. Пишется при каждом обновлении.</p>
+          <p><b>Зачем нужен:</b></p>
+          <ul>
+            <li>Игроки понимают, что нового они получат</li>
+            <li>Разработчик ведёт историю изменений</li>
+            <li>Помогает при поиске багов («это появилось в версии 1.2.0»)</li>
+            <li>Повышает доверие к проекту</li>
+          </ul>
+          <div class="example-box">
+Что нового в версии 1.1.0:<br>
+— Добавлен новый уровень «Тёмный лес»<br>
+— Исправлен баг с зависанием на 3 уровне<br>
+— Улучшена производительность на слабых устройствах<br>
+— Добавлены новые звуки
+          </div>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">🖼️</span> Зачем нужна обложка?</h2>
+          <p>Обложка — это первое, что видит игрок в магазине. Это «лицо» вашей игры.</p>
+          <p><b>Требования:</b></p>
+          <ul>
+            <li>Квадратное изображение (рекомендуется <code>512×512</code> или больше)</li>
+            <li>Формат: PNG или JPG</li>
+            <li>Должна чётко читаться даже в маленьком размере</li>
+            <li>Отражать жанр и атмосферу игры</li>
+          </ul>
+          <p><b>Зачем нужна:</b></p>
+          <ul>
+            <li>Привлекает внимание в каталоге</li>
+            <li>Помогает игроку быстро понять, о чём игра</li>
+            <li>Используется в поиске, рекомендациях, соцсетях</li>
+            <li>Без обложки игра выглядит «незавершённой»</li>
+          </ul>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">📖</span> Зачем нужно описание?</h2>
+          <p>Описание — это текст, который рассказывает игроку, о чём ваша игра. Хорошее описание помогает игроку принять решение: скачать или пройти мимо.</p>
+          <p><b>Что стоит указать:</b></p>
+          <ul>
+            <li>Жанр и основные механики</li>
+            <li>Сюжет или завязку (без спойлеров)</li>
+            <li>Особенности игры (мультиплеер, открытый мир, головоломки)</li>
+            <li>Для каких устройств подходит</li>
+          </ul>
+          <div class="info-callout">
+            <b>Совет:</b> пишите коротко, но ёмко. Первые 2–3 предложения — самые важные, именно их видит игрок до того, как развернёт полное описание.
+          </div>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">🏷️</span> Зачем нужны теги (жанры)?</h2>
+          <p>Теги — это ключевые слова, по которым игроки ищут игры. Они помогают магазину понять, к какой категории относится ваш проект.</p>
+          <p><b>Примеры тегов:</b></p>
+          <ul>
+            <li>По жанру: <code>хоррор</code>, <code>платформер</code>, <code>RPG</code>, <code>головоломка</code>, <code>шутер</code></li>
+            <li>По стилю: <code>пиксельная графика</code>, <code>3D</code>, <code>минимализм</code></li>
+            <li>По особенностям: <code>одиночная</code>, <code>мультиплеер</code>, <code>инди</code>, <code>атмосферная</code></li>
+          </ul>
+          <p>Чем точнее теги — тем легче игрокам найти вашу игру через поиск.</p>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">🔞</span> Зачем нужен возрастной рейтинг?</h2>
+          <p>Возрастной рейтинг показывает, для какой аудитории предназначена игра. Это требование закона и забота об игроках.</p>
+          <p><b>Стандартные категории:</b></p>
+          <ul>
+            <li><code>0+</code> — для всех, без ограничений</li>
+            <li><code>6+</code> — может содержать лёгкие пугающие элементы</li>
+            <li><code>12+</code> — умеренное насилие, сложные темы</li>
+            <li><code>16+</code> — более серьёзный контент, напряжённая атмосфера</li>
+            <li><code>18+</code> — только для взрослых, сильный контент</li>
+          </ul>
+          <div class="info-callout">
+            <b>Почему это важно:</b> в России возрастной регламент регулируется Федеральным законом № 436-ФЗ «О защите детей от информации, причиняющей вред их здоровью и развитию». Неправильно указанный рейтинг — это нарушение закона.
+          </div>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">🔗</span> Где хранить файлы игры для публикации?</h2>
+          <p>Чтобы игроки могли скачать вашу игру, файл нужно разместить в интернете. Вот популярные и бесплатные варианты:</p>
+          <ul>
+            <li><b>GitHub Releases</b> — бесплатный сервис от Microsoft, идеально подходит для небольших и средних проектов. Удобно, есть история версий</li>
+            <li><b>Google Drive / Яндекс.Диск / Dropbox</b> — облачные хранилища, можно дать прямую ссылку на файл</li>
+            <li><b>itch.io</b> — популярная платформа для инди-игр, даёт прямые ссылки на скачивание</li>
+            <li><b>Собственный сайт</b> — если у вас есть хостинг, можно разместить файлы там</li>
+          </ul>
+          <div class="info-callout">
+            <b>Важно:</b> ссылка должна быть <b>прямой</b> — то есть при переходе по ней должно начинаться скачивание файла, а не открываться страница с кнопкой «Скачать».
+          </div>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">🛠️</span> В чём создавать игры?</h2>
+          <p>Для разработки игр существует множество инструментов — от простых конструкторов до профессиональных движков.</p>
+          <p><b>Популярные игровые движки:</b></p>
+          <ul>
+            <li><b>Unity</b> — один из самых популярных движков, подходит для 2D и 3D игр. Язык: C#</li>
+            <li><b>Unreal Engine</b> — мощный движок для AAA-игр и 3D-проектов. Язык: C++ и Blueprints</li>
+            <li><b>Godot</b> — бесплатный движок с открытым кодом, отлично подходит для 2D. Язык: GDScript (похож на Python)</li>
+            <li><b>GameMaker</b> — простой движок для 2D-игр, идеален для новичков</li>
+            <li><b>Construct / GDevelop</b> — визуальные конструкторы без программирования</li>
+          </ul>
+          <p><b>Дополнительные инструменты:</b></p>
+          <ul>
+            <li><b>Графика:</b> Aseprite (пиксель-арт), Photoshop, Krita, Blender (3D)</li>
+            <li><b>Звук:</b> Audacity, BFXR (для ретро-звуков), FL Studio</li>
+            <li><b>Код:</b> Visual Studio Code, Visual Studio, Rider</li>
+            <li><b>Версионирование:</b> Git + GitHub (обязательно для любого проекта!)</li>
+          </ul>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">📋</span> Чек-лист перед публикацией</h2>
+          <p>Перед тем как выпустить игру, проверьте, что у вас есть всё необходимое:</p>
+          <ul>
+            <li>✅ Готовый собранный файл (<code>.apk</code>, <code>.exe</code> или <code>.dmg</code>)</li>
+            <li>✅ Уникальный паспорт игры (package name)</li>
+            <li>✅ Номер версии (например, <code>1.0.0</code>)</li>
+            <li>✅ Квадратная обложка (не менее 512×512)</li>
+            <li>✅ Подробное описание игры</li>
+            <li>✅ Теги для поиска (жанр, особенности)</li>
+            <li>✅ Указан размер файла</li>
+            <li>✅ Выбран возрастной рейтинг</li>
+            <li>✅ Прямая ссылка на скачивание</li>
+            <li>✅ Игра протестирована на разных устройствах</li>
+            <li>✅ Нет критических багов</li>
+          </ul>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">⚠️</span> Чего делать НЕЛЬЗЯ</h2>
+          <p>Даже если вы начинающий разработчик, важно знать, чего делать категорически нельзя:</p>
+          <ul>
+            <li>❌ <b>Добавлять вредоносный код</b> — вирусы, трояны, шпионские скрипты. Это уголовное преступление</li>
+            <li>❌ <b>Использовать чужие ресурсы без разрешения</b> — картинки, музыку, код. Нарушение авторских прав (ГК РФ ч.4)</li>
+            <li>❌ <b>Собирать личные данные игроков тайно</b> — нарушение 152-ФЗ «О персональных данных»</li>
+            <li>❌ <b>Запрашивать лишние разрешения</b> — доступ к контактам, SMS, камере без игровой необходимости</li>
+            <li>❌ <b>Использовать скрытую рекламу или мошеннические механики</b></li>
+            <li>❌ <b>Копировать чужие игры</b> — даже «по мотивам» без изменений</li>
+          </ul>
+          <div class="info-callout">
+            <b>Помните:</b> за нарушение этих правил игра будет удалена, а разработчик может понести юридическую ответственность.
+          </div>
+        </div>
+
+        <div class="why-block">
+          <h2><span class="why-icon">💡</span> С чего начать новичку?</h2>
+          <p>Если вы только начинаете путь разработчика, вот простой план:</p>
+          <ul>
+            <li><b>Шаг 1.</b> Выберите движок. Для начала подойдёт Godot или GameMaker — они простые и бесплатные</li>
+            <li><b>Шаг 2.</b> Пройдите любой бесплатный туториал на YouTube (например, «свой первый платформер за 1 час»)</li>
+            <li><b>Шаг 3.</b> Сделайте маленькую игру — не пытайтесь сразу создать шедевр. Первая игра должна быть простой</li>
+            <li><b>Шаг 4.</b> Зарегистрируйтесь на GitHub и научитесь сохранять проект через Git</li>
+            <li><b>Шаг 5.</b> Протестируйте игру на разных устройствах (своём, друзей)</li>
+            <li><b>Шаг 6.</b> Соберите файл (<code>.apk</code> или <code>.exe</code>) и подготовьте обложку, описание, теги</li>
+            <li><b>Шаг 7.</b> Опубликуйте на itch.io или другой платформе, чтобы получить первые отзывы</li>
+            <li><b>Шаг 8.</b> Учитесь на ошибках и делайте следующий проект лучше</li>
+          </ul>
+          <div class="info-callout">
+            <b>Главный совет:</b> не бойтесь делать маленькие проекты. Каждая завершённая игра — это опыт, который нельзя получить из учебников.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <section class="page" id="page-rules" hidden>
       <div class="page-head"><h1>Свод правил</h1><p>Официальный свод правил игровой платформы MAYRUN Store</p></div>
 
@@ -798,36 +1622,170 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
       </div>
 
       <div class="prose">
-        <div class="notice">Утверждено игровой студией «MYRUNPLAY&gt;_» при поддержке холдинга «Mayskiy Runway» (MYRY). Настоящий документ определяет единые, обязательные для исполнения правила публикации игрового контента, требования к разработчикам (авторам) и нормы поведения пользователей на территории цифрового маркетплейса MAYRUN Store.</div>
+        <div class="notice">
+          <b>ОФИЦИАЛЬНЫЙ СВОД ПРАВИЛ ИГРОВОЙ ПЛАТФОРМЫ «MAYRUN STORE»</b><br><br>
+          <b>Утверждено:</b> Игровой студией «MYRUNPLAY&gt;_»<br>
+          <b>При поддержке холдинга:</b> «Mayskiy Runway» (MYRY)<br><br>
+          Настоящий документ определяет единые, обязательные для исполнения правила публикации игрового контента, требования к разработчикам (авторам) и нормы поведения пользователей на территории цифрового маркетплейса MAYRUN Store.
+        </div>
 
         <h2>Примечания</h2>
-        <p><span class="num">0.1.</span> Удаление по требованию государственных органов. Администрация MAYRUN Store вправе незамедлительно удалить или ограничить доступ к любой игре, если соответствующее требование поступило от Роскомнадзора, Генеральной прокуратуры РФ, суда или иного уполномоченного государственного органа.</p>
+        <p><span class="num">0.1.</span> <b>Удаление по требованию государственных органов.</b> Администрация MAYRUN Store вправе незамедлительно удалить или ограничить доступ к любой игре, если соответствующее требование поступило от Роскомнадзора, Генеральной прокуратуры РФ, суда или иного уполномоченного государственного органа. Автор игры уведомляется о таком удалении по указанным им контактным данным. Данное действие не является нарушением прав автора, так как выполняется в соответствии с законодательством РФ.</p>
 
         <h2>Статус платформы и защита данных</h2>
-        <p><span class="num">1.1.</span> Цифровой маркетплейс MAYRUN Store полностью и безоговорочно принадлежит игровой студии MYRUNPLAY&gt;_</p>
-        <p><span class="num">1.2.</span> Платформа MAYRUN Store и Студия-владелец берут на себя обязательства по обеспечению сквозной безопасности.</p>
+        <p><span class="num">1.1.</span> Цифровой маркетплейс MAYRUN Store полностью и безоговорочно принадлежит игровой студии MYRUNPLAY&gt;_.</p>
+        <p><span class="num">1.2.</span> Платформа MAYRUN Store и Студия-владелец берут на себя обязательства по обеспечению сквозной безопасности. Платформа гарантирует защиту опубликованных игр, конфиденциальность личной информации, а также сохранность персональных данных авторов и независимых компаний-разработчиков.</p>
+        <p><span class="num">1.3.</span> Техническая и правовая защита данных осуществляется при непосредственной поддержке органов МБИ (Майская Безопасность Интернета).</p>
 
         <h2>Регламент публикации и модернизации контента для авторов</h2>
-        <p><span class="num">2.1.</span> <b>Формат данных:</b> игровые продукты принимаются к публикации исключительно в виде скомпилированных файлов расширения .APK и .EXE.</p>
-        <p><span class="num">2.2.</span> <b>Контроль обновлений:</b> любые обновления обязаны проходить повторную процедуру проверки модерацией.</p>
-        <p><span class="num">2.3.</span> <b>Порядок удаления контента:</b> если автор решает удалить свою игру с платформы, он обязан написать официальное обращение в службу поддержки через ВК.</p>
+        <div class="deprecated">
+          <strong>ВАЖНО:</strong> Раздел 2 применяется исключительно к <strong>историческим играм сторонних авторов</strong>, опубликованным ранее. <strong>В настоящее время платформа больше не принимает игры от сторонних авторов — публикуются только проекты студии MYRUNPLAY&gt;_.</strong>
+        </div>
+        <p class="author-legacy"><span class="num">2.1.</span> <b>Формат данных:</b> игровые продукты принимаются к публикации исключительно в виде скомпилированных файлов расширения .APK (для операционной системы Android). Продукты в иных форматах к рассмотрению не допускаются.</p>
+        <p class="author-legacy"><span class="num">2.2.</span> <b>Контроль обновлений:</b> любые обновления (патчи, фиксы, DLC), выпускаемые к уже опубликованным играм, обязаны проходить повторную процедуру проверки модерацией до их появления в общем доступе.</p>
+        <p class="author-legacy"><span class="num">2.3.</span> <b>Порядок удаления контента:</b> если автор решает удалить свою игру с платформы, он обязан написать официальное обращение в службу поддержки через ВК. Разработчик должен предоставить доказательства и подтвердить, что данная игра действительно принадлежит ему. Процесс верификации и удаления также занимает стандартный срок модерации (от 1 до 3 дней, в некоторых сложных случаях — больше).</p>
+        <p class="author-legacy"><span class="num">2.3.1.</span> <b>Отзыв заявки на удаление:</b> автор, подавший официальное обращение на удаление своей игры, вправе отозвать данную заявку в течение 7 (семи) календарных дней с момента её подачи. Отзыв подаётся через тот же официальный канал связи — личные сообщения официального сообщества Студии в ВКонтакте (ВК). Если игра ещё не была фактически удалена, процедура удаления отменяется, а публикация сохраняется на прежних условиях. Если игра уже была удалена, восстановление возможно после повторной модерации и только при наличии технической возможности. Стандартный срок рассмотрения — от 1 до 3 рабочих дней. Если с момента подачи заявки на удаление прошло более 7 календарных дней, удаление считается окончательным, а повторная публикация игры оформляется как новая заявка на общих основаниях.</p>
+        <p class="author-legacy"><span class="num">2.4.</span> <b>Корпоративная цензура:</b> публикуемые игры и сопутствующие им медиаматериалы не должны содержать элементов, прямо или косвенно унижающих, дискредитирующих или высмеивающих «Майские авиалинии», холдинг MYRY, завод «MAYE BALOVSK» или любые другие дочерние компании, входящие в контур MAYE.</p>
+        <p class="author-legacy"><span class="num">2.5.</span> <b>Возрастная маркировка:</b> при подаче заявки каждый автор обязан указать рекомендуемый возрастной ценз для своей игры в соответствии со стандартами холдинга. Служба модерации оставляет за собой право скорректировать возрастной рейтинг в ходе проверки, если содержание игры (например, уровень насилия, атмосфера или пугающие элементы в хоррорах) не соответствует заявленной планке.</p>
+        <p class="author-legacy"><span class="num">2.6.</span> <b>Соблюдение правил маркетплейса:</b> любой автор, размещающий продукт в магазине, автоматически соглашается со всеми внутренними регламентами маркетплейса и обязуется не нарушать их. В случае выявления нарушений продукт подлежит немедленной блокировке.</p>
 
         <h2>Запрет на скрытые вредоносные механики (антифрод)</h2>
-        <p><span class="num">3.1.</span> Внутри публикуемых .APK и .EXE файлов категорически запрещено использование скрытых вредоносных скриптов, вирусов, программ-шпионов.</p>
-        <p><span class="num">3.2.</span> При поддержке органов МБИ все приложения, уличенные в мошенничестве, блокируются на платформе навсегда.</p>
+        <div class="deprecated">
+          <strong>ВАЖНО:</strong> Раздел 3 применяется к <strong>историческим играм сторонних авторов</strong>. <strong>Платформа больше не принимает игры от сторонних авторов!</strong>
+        </div>
+        <p class="author-legacy"><span class="num">3.1.</span> Внутри публикуемых .APK файлов категорически запрещено использование скрытых вредоносных скриптов, вирусов, программ-шпионов, троянов, а также любых мошеннических механик, направленных на тайный сбор личных данных или несанкционированное списание средств.</p>
+        <p class="author-legacy"><span class="num">3.2.</span> При поддержке органов МБИ все приложения, уличенные в мошенничестве, блокируются на платформе навсегда без права на повторное размещение.</p>
+        <p class="author-legacy"><span class="num">3.3.</span> <b>Декларирование разрешений APK:</b> автор обязан указывать в описании игры все разрешения, которые запрашивает .APK-файл, если они не являются очевидными из самого игрового процесса. Запрещается запрашивать доступ к контактам, SMS, журналу вызовов, микрофону, камере, геолокации, файлам, специальным возможностям (Accessibility), установке сторонних приложений и иным чувствительным данным без прямой, понятной и обоснованной игровой необходимости.</p>
+        <p class="author-legacy"><span class="num">3.4.</span> <b>Проверка разрешений:</b> если .APK запрашивает разрешения, не соответствующие заявленному функционалу игры, либо автор не может объяснить их необходимость, модерация вправе:<br>
+        — запросить письменные пояснения;<br>
+        — приостановить публикацию или обновление;<br>
+        — обязать автора выпустить исправленную версию;<br>
+        — заблокировать продукт до устранения нарушений.<br>
+        При выявлении вредоносного, шпионского или мошеннического использования разрешений применяется бессрочная блокировка согласно п. 3.2.</p>
+        <p class="author-legacy"><span class="num">3.5.</span> <b>Скрытые разрешения и сторонний код:</b> запрещены скрытые или недекларированные разрешения, обфускация вредоносных функций, а также динамическая загрузка и исполнение стороннего кода, если это не согласовано с модерацией и не обусловлено официальным игровым функционалом.</p>
 
         <h2>Ограничение ответственности студии и маркетплейса</h2>
-        <p><span class="num">4.1.</span> Маркетплейс MAYRUN Store предоставляет исключительно цифровую площадку для дистрибуции контента.</p>
+        <p><span class="num">4.1.</span> Маркетплейс MAYRUN Store предоставляет исключительно цифровую площадку для дистрибуции контента. Студия MYRUNPLAY&gt;_ не несет ответственности за технические сбои, некорректную работу пользовательских устройств, системные ошибки или потерю личного игрового прогресса, если они были вызваны программными сбоями внутри .APK файлов сторонних авторов.</p>
+        <p><span class="num">4.2.</span> Вся ответственность за работоспособность, стабильность и техническую безопасность игры лежит исключительно на разработавшем её авторе.</p>
 
-        <h2>Правила цензуры для пользователей</h2>
-        <p><span class="num">6.1.</span> <b>Запрет ненормативной лексики:</b> в текстах отзывов и комментариев категорически запрещено использование мата.</p>
-        <p><span class="num">6.2.</span> <b>Цензура профиля:</b> в публичных никнеймах полностью запрещено использование нецензурной брани.</p>
+        <h2>Правовой режим использования интеллектуальной собственности (брендинг)</h2>
+        <p><span class="num">5.1.</span> Все официальные графические знаки, включая логотипы MAYRUN Store, MAYRUN Store Author, MAYRUN Store Rules, MAYRUN Store Reviews, а также фирменную плашку «Скачивайте из MayRun Store», защищены авторским правом и являются собственностью студии MYRUNPLAY&gt;_.</p>
+        <p><span class="num">5.2.</span> Разработчикам и партнерам официально разрешено использовать утвержденные логотипы платформы исключительно в следующих строго определенных целях:<br>
+        — в информационных постах (в социальных сетях, включая ВК, и на сайтах);<br>
+        — в официальных тизерах и видеороликах, предваряющих выход игр;<br>
+        — в рекламных материалах (для демонстрации аудитории официального места размещения игры и указания источника, откуда её можно легально скачать).</p>
+
+        <h2>Правила цензуры для пользователей и право на редактирование</h2>
+        <p>Игровое сообщество и лица, оставляющие рецензии к продуктам, обязаны соблюдать жесткие рамки цензуры. Любой пользователь платформы обязан сдерживать личные эмоции и соблюдать следующие правила:</p>
+        <p><span class="num">6.1.</span> <b>Запрет ненормативной лексики:</b> в текстах отзывов и комментариев категорически запрещено использование мата, завуалированных оскорблений и грубых выражений.</p>
+        <p><span class="num">6.2.</span> <b>Цензура профиля:</b> в публичных никнеймах (именах пользователей) полностью запрещено использование нецензурной брани, оскорбительных лозунгов и элементов контента категории 18+ (насилие, эротика).</p>
+        <p><span class="num">6.3.</span> <b>Полномочия платформы по модерации:</b> маркетплейс MAYRUN Store обладает официальным, законным и полноправным правом изменять и корректировать пользовательский контент при обнаружении нарушений:<br>
+        — при наличии в тексте отзыва матов или оскорблений модерация полноправно изменяет отзыв, полностью удаляя и вырезая из него нецензурные выражения;<br>
+        — никнеймы пользователей, содержащие любые нарушения правил, официально переименовываются: запрещенные слова заменяются на символы ***, при этом сохраняется только нормальная (допустимая правилами) часть имени, если таковая имеется.</p>
 
         <h2>Сроки и график работы службы модерации</h2>
-        <p><span class="num">7.1.</span> Понедельник — Пятница: с 15:00 до 20:00 (по МСК); Суббота — Воскресенье: с 15:00 до 20:30 (по МСК).</p>
+        <p><span class="num">7.1.</span> Рассмотрение заявок от авторов на публикацию/удаление/обновление .APK файлов, а также проверка отзывов и никнеймов на соответствие правилам осуществляется Службой модерации по фиксированному графику. Расчет времени ведется исключительно по Московскому времени (МСК):<br>
+        — Понедельник — Пятница: с 15:00 до 20:00 (по МСК);<br>
+        — Суббота — Воскресенье: с 15:00 до 20:30 (по МСК).</p>
+        <p><span class="num">7.2.</span> <b>Сроки модерации:</b> полный цикл проверки присланных игровых проектов, обновлений, запросов на удаление игр от верифицированных авторов, а также обработка жалоб на пользовательский контент стандартно занимают от 1 до 3 рабочих дней. В отдельных технически сложных ситуациях сроки могут быть увеличены.</p>
 
-        <h2>Контактная информация</h2>
-        <p><span class="num">8.1.</span> Прямая оперативная связь с дежурными модераторами осуществляется через сообщения официального сообщества Студии в ВКонтакте (ВК).</p>
+        <h2>Контактная информация и порядок апелляций</h2>
+        <p><span class="num">8.1.</span> Прямая оперативная связь с дежурными модераторами и администрацией платформы MAYRUN Store по любым вопросам работы маркета осуществляется через сообщения официального сообщества Студии в ВКонтакте (ВК).</p>
+        <p><span class="num">8.2.</span> <b>Порядок подачи апелляций:</b> порядок обжалования решений модерации, блокировок, удаления игр и корректировки пользовательского контента определяется разделом 9 настоящего Свода правил.</p>
+
+        <h2>Обжалование решений модерации</h2>
+        <p class="author-legacy"><span class="num">9.1.</span> <b>Право на обжалование:</b> автор или пользователь вправе обжаловать:<br>
+        — блокировку или удаление игры;<br>
+        — отказ в публикации или обновлении .APK;<br>
+        — требование изменить возрастной рейтинг;<br>
+        — корректировку отзыва или никнейма;<br>
+        — иные меры модерации, затрагивающие права автора или пользователя.</p>
+        <p class="author-legacy"><span class="num">9.2.</span> <b>Срок подачи апелляции:</b> апелляция подаётся в течение 14 календарных дней с момента получения уведомления о решении модерации. При наличии уважительной причины срок может быть восстановлен по решению администрации.</p>
+        <p class="author-legacy"><span class="num">9.3.</span> <b>Канал подачи:</b> апелляция направляется исключительно через личные сообщения официального сообщества Студии в ВКонтакте (ВК). Тема обращения: «Апелляция MAYRUN Store».</p>
+        <p class="author-legacy"><span class="num">9.4.</span> <b>Содержание апелляции:</b> в апелляции необходимо указать:<br>
+        — почта;<br>
+        — название игры и/или ID продукта;<br>
+        — суть обжалуемого решения;<br>
+        — с чем именно не согласен заявитель;<br>
+        — ссылки, скриншоты, доказательства авторства или отсутствия нарушения.<br>
+        По запросу модерации автор обязан предоставить .APK, исходные материалы, подпись приложения или иные подтверждения.</p>
+        <p class="author-legacy"><span class="num">9.5.</span> <b>Срок рассмотрения апелляции:</b> стандартный срок рассмотрения — от 1 до 3 рабочих дней. В сложных технических или правовых ситуациях срок может быть увеличен до 7 рабочих дней. Апелляцию по возможности рассматривает старший модератор или представитель администрации, не принимавший первичное решение.</p>
+        <p class="author-legacy"><span class="num">9.6.</span> <b>Возможные решения по апелляции:</b> по итогам рассмотрения может быть принято одно из решений:<br>
+        — оставить первичное решение в силе;<br>
+        — отменить его;<br>
+        — изменить меру модерации;<br>
+        — вернуть материал на повторную проверку;<br>
+        — запросить дополнительные доказательства.<br>
+        Решение должно быть мотивированным.</p>
+        <p class="author-legacy"><span class="num">9.7.</span> <b>Приостановка действия решения:</b> подача апелляции не приостанавливает действие блокировки, удаления или корректировки, если администрация отдельно не решит иначе.</p>
+        <p class="author-legacy"><span class="num">9.8.</span> <b>Повторные апелляции:</b> повторная апелляция без новых доказательств или новых обстоятельств может быть оставлена без рассмотрения.</p>
+
+        <h2>Права авторов</h2>
+        <div class="deprecated">
+          <strong>ВАЖНО:</strong> Раздел 10 применяется к <strong>историческим играм сторонних авторов</strong>. <strong>Платформа больше не принимает игры от сторонних авторов!</strong> Все новые игры публикуются исключительно студией MYRUNPLAY&gt;_.
+        </div>
+        <p class="author-legacy"><span class="num">10.1.</span> <b>Правообладание:</b> автор сохраняет за собой все исключительные права на игру, её код, графику, звук, персонажей, сюжет, товарные знаки и иные материалы, созданные им или законно приобретённые. Публикация игры на платформе MAYRUN Store не означает передачу, отчуждение или совместное владение этими правами.</p>
+        <p class="author-legacy"><span class="num">10.2.</span> <b>Лицензия маркетплейсу:</b> публикуя игру, автор предоставляет MAYRUN Store простую (неисключительную), отзывную и ограниченную лицензию только на:<br>
+        — хранение;<br>
+        — отображение;<br>
+        — каталогизацию;<br>
+        — техническую проверку;<br>
+        — продвижение;<br>
+        — распространение .APK в пределах платформы.<br>
+        Данная лицензия не даёт Студии права издавать, продавать или лицензировать игру от своего имени вне платформы без отдельного соглашения с автором.</p>
+        <p class="author-legacy"><span class="num">10.3.</span> <b>Роль маркетплейса:</b> MAYRUN Store является цифровой площадкой для дистрибуции контента и не является автором, соавтором, издателем или правообладателем сторонних игр. Исключение составляют собственные бренды, логотипы и материалы Студии MYRUNPLAY&gt;_.</p>
+        <p class="author-legacy"><span class="num">10.4.</span> <b>Гарантии автора:</b> автор гарантирует, что обладает достаточными правами для публикации игры и что игра не нарушает права третьих лиц. Ответственность за претензии третьих лиц, связанные с содержанием игры, несёт автор.</p>
+        <p class="author-legacy"><span class="num">10.5.</span> <b>Прекращение лицензии:</b> при удалении игры по правилам п. 2 лицензия, выданная маркетплейсу, прекращается. Исключение составляют технические и резервные копии, которые могут храниться разумный срок для обеспечения работы платформы, разрешения споров и исполнения требований закона.</p>
+        <p class="author-legacy"><span class="num">10.6.</span> <b>Коммерческие условия:</b> если на платформе вводится монетизация, порядок распределения доходов, комиссий и выплат регулируется отдельным договором или офертой. Отсутствие такого договора не создаёт для платформы обязательств по выплатам автору.</p>
+
+        <h2>Раздел 11. Конфиденциальность и защита персональных данных</h2>
+        <p><span class="num">11.1.</span> <b>Правовая основа.</b> Обработка персональных данных авторов, пользователей и иных лиц на платформе MAYRUN Store осуществляется в строгом соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» и принятыми в соответствии с ним подзаконными актами.</p>
+        <p><span class="num">11.2.</span> <b>Состав обрабатываемых данных.</b> Платформа может обрабатывать следующие категории данных:<br>
+        — имя или никнейм автора/пользователя, почту;<br>
+        — контактные данные (адрес электронной почты, аккаунт в ВКонтакте);<br>
+        — данные, необходимые для верификации авторства и рассмотрения апелляций.</p>
+        <p><span class="num">11.3.</span> <b>Цели обработки.</b> Персональные данные обрабатываются исключительно в целях:<br>
+        — идентификации автора и подтверждения его прав на публикуемый контент;<br>
+        — обеспечения работы платформы и технической поддержки;<br>
+        — рассмотрения апелляций и обращений через официальные каналы связи;<br>
+        — исполнения требований законодательства Российской Федерации.</p>
+        <p><span class="num">11.4.</span> <b>Правовые основания.</b> Обработка осуществляется на основании:<br>
+        — исполнения договора (пользовательского соглашения или оферты платформы), стороной которого является субъект персональных данных (п. 5 ч. 1 ст. 6 152-ФЗ);<br>
+        — отдельного согласия субъекта, оформленного в соответствии с требованиями законодательства, — в случаях, когда обработка выходит за рамки исполнения договора.</p>
+        <p><span class="num">11.5.</span> <b>Требования к согласию.</b> Согласие на обработку персональных данных должно быть информированным, конкретным, предметным и сознательным. С 1 сентября 2025 года согласие оформляется отдельно от иных документов; не допускается его «склеивание» с другими соглашениями или документами. Субъект должен понимать цель, объём и срок обработки своих данных.</p>
+        <p><span class="num">11.6.</span> <b>Локализация данных.</b> В соответствии с требованиями 152-ФЗ базы данных, содержащие персональные данные граждан Российской Федерации, размещаются и обрабатываются исключительно на территории Российской Федерации, за исключением случаев, прямо предусмотренных законом.</p>
+        <p><span class="num">11.7.</span> <b>Хранение и уничтожение.</b> Персональные данные хранятся не дольше, чем этого требуют цели их обработки. По достижении целей обработки данные подлежат уничтожению или обезличиванию в установленном порядке. Резервные копии могут храниться разумный срок для обеспечения работы платформы и разрешения споров.</p>
+        <p><span class="num">11.8.</span> <b>Передача третьим лицам.</b> Персональные данные не передаются третьим лицам, за исключением случаев:<br>
+        — прямо предусмотренных законодательством Российской Федерации (по запросу уполномоченных государственных органов);<br>
+        — необходимых для технического обеспечения работы платформы (хостинг, защита от мошенничества) — в объёме, минимально необходимом для таких целей.</p>
+        <p><span class="num">11.9.</span> <b>Права субъекта персональных данных.</b> Автор или пользователь вправе:<br>
+        — запросить информацию об обработке своих персональных данных;<br>
+        — потребовать уточнения, блокирования или уничтожения данных, если они являются неполными, устаревшими, неточными или незаконно полученными;<br>
+        — отозвать согласие на обработку персональных данных (если обработка основана на согласии).<br>
+        Запросы направляются через официальный канал связи — личные сообщения официального сообщества Студии в ВКонтакте (ВК).</p>
+        <p><span class="num">11.10.</span> <b>Ответственный за обработку.</b> Студия MYRUNPLAY&gt;_ назначает ответственное лицо за организацию обработки персональных данных на платформе MAYRUN Store. Контактные данные ответственного лица предоставляются по официальному запросу.</p>
+        <p><span class="num">11.11.</span> <b>Меры защиты.</b> Платформа принимает необходимые правовые, организационные и технические меры для защиты персональных данных от неправомерного доступа, уничтожения, изменения, блокирования, копирования и распространения, включая:<br>
+        — назначение ответственного за обработку;<br>
+        — ограничение доступа сотрудников и модераторов к данным по принципу минимальной необходимости;<br>
+        — применение средств защиты информации;<br>
+        — внутренний контроль соответствия обработки требованиям законодательства.</p>
+        <p><span class="num">11.12.</span> <b>Актуализация раздела.</b> При изменении законодательства Российской Федерации в области персональных данных положения настоящего раздела применяются с учётом таких изменений с момента вступления их в силу.</p>
+
+        <h2>Законы и нормативные акты, которые соблюдает маркетплейс MAYRUN Store</h2>
+        <ul>
+          <li><b>Федеральный закон от 27.07.2006 № 152-ФЗ «О персональных данных»</b> — регулирует обработку, хранение и защиту персональных данных авторов и пользователей; устанавливает требования к согласию, локализации данных и обязанности оператора.</li>
+          <li><b>Федеральный закон от 24.06.2025 № 156-ФЗ</b> — вносит изменения в 152-ФЗ, устанавливая унифицированную форму согласия и требование оформлять его отдельно от иных документов с 1 сентября 2025 года.</li>
+          <li><b>Постановление Правительства РФ от 01.11.2012 № 1119</b> — устанавливает требования к защите персональных данных при их обработке в информационных системах.</li>
+          <li><b>Закон Российской Федерации от 07.02.1992 № 2300-I «О защите прав потребителей»</b> — регулирует отношения между платформой и пользователями как потребителями цифровых продуктов; определяет права на информацию, возврат цифрового продукта надлежащего качества в течение семи дней и защиту при обнаружении недостатков.</li>
+          <li><b>Декрет Высшего Государственного Совета Союзного государства от 06.12.2024 № 6 «О единых правилах в области защиты прав потребителей»</b> — вводит понятие «цифровой продукт» и устанавливает механизмы защиты прав потребителей при реализации цифровых продуктов на территории Союзного государства.</li>
+          <li><b>Постановление Правительства РФ от 31.12.2020 № 2463</b> — утверждает Правила продажи товаров при дистанционном способе продажи, включая обязанность предоставлять полную и достоверную информацию о цифровом продукте до его оплаты.</li>
+          <li><b>Федеральный закон от 27.07.2006 № 149-ФЗ «Об информации, информационных технологиях и о защите информации»</b> — регулирует отношения при осуществлении права на поиск, получение, передачу и распространение информации, применении информационных технологий и обеспечении защиты информации.</li>
+          <li><b>Федеральный закон от 31.07.2025 № 289-ФЗ «Об отдельных вопросах регулирования платформенной экономики в Российской Федерации»</b> — формирует правовые основы функционирования цифровых платформ и маркетплейсов, устанавливает требования к договорам между операторами платформ и партнёрами (вступает в силу с 1 октября 2026 года).</li>
+          <li><b>Федеральный закон от 26.07.2006 № 135-ФЗ «О защите конкуренции»</b> — регулирует отношения, связанные с защитой конкуренции на цифровых рынках, включая деятельность маркетплейсов как цифровых платформ.</li>
+          <li><b>Гражданский кодекс Российской Федерации (часть четвёртая)</b> — регулирует авторские права на результаты интеллектуальной деятельности, включая цифровой контент и программное обеспечение; определяет исключительные права авторов и механизмы их защиты.</li>
+          <li><b>Постановление Конституционного Суда РФ от 16.06.2026 № 39-П</b> — определяет особенности ответственности информационного посредника (маркетплейса) в соответствии со статьями 1253.1 ГК РФ.</li>
+          <li><b>Федеральный закон от 29.12.2022 № 572-ФЗ</b> — регулирует создание и функционирование Единой биометрической системы, включая требования к сбору и хранению биометрических данных операторами.</li>
+        </ul>
       </div>
     </section>
 
@@ -876,9 +1834,18 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
         </div>
 
         <div class="faq-item">
-          <button type="button" class="faq-q"><span class="q-num">05</span><span class="q-text">Когда выйдет MayUmshka 2?</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <button type="button" class="faq-q"><span class="q-num">05</span><span class="q-text">Почему магазин не принимает игры от других авторов?</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
           <div class="faq-wrap"><div class="faq-inner"><div class="faq-answer">
-            <p>Команда <b>MYRUNPLAY&gt;_</b> уже занимается разработкой! Скоро мы выпустим игру. Следите за новостями.</p>
+            <p>Данное решение обусловлено необходимостью <b>полного соблюдения законодательства Российской Федерации</b> в сфере интеллектуальной собственности, защиты персональных данных и регулирования цифрового контента. Публикация сторонних игр без надлежащего юридического оформления создаёт для платформы существенные правовые риски.</p>
+            <p><b>Основные законодательные основания:</b></p>
+            <p>📜 <b>Часть четвёртая Гражданского кодекса РФ (ГК РФ)</b> — регулирует авторские права на результаты интеллектуальной деятельности. Согласно ст. 1225, 1228, 1255, 1270 ГК РФ, использование произведения без согласия правообладателя является нарушением исключительных прав. Для легальной публикации чужой игры необходимо заключение лицензионного договора (ст. 1235 ГК РФ) или договора об отчуждении исключительного права (ст. 1234 ГК РФ).</p>
+            <p>📜 <b>Федеральный закон от 27.07.2006 № 152-ФЗ «О персональных данных»</b> — обязывает оператора (платформу) обеспечивать законность обработки персональных данных пользователей. При публикации сторонних игр платформа не может гарантировать, что разработчик соблюдает требования закона при сборе данных игроков (ст. 5, 6, 18, 19 152-ФЗ).</p>
+            <p>📜 <b>Федеральный закон от 27.07.2006 № 149-ФЗ «Об информации, информационных технологиях и о защите информации»</b> — устанавливает ответственность владельца информационного ресурса за распространяемый контент. Платформа несёт риск привлечения к ответственности за нарушение авторских прав, распространение запрещённой информации или недостоверных сведений (ст. 15, 15.2, 15.3, 15.4 149-ФЗ).</p>
+            <p>📜 <b>Федеральный закон от 29.12.2010 № 436-ФЗ «О защите детей от информации, причиняющей вред их здоровью и развитию»</b> — обязывает маркировать контент возрастными категориями (0+, 6+, 12+, 16+, 18+). Платформа не может гарантировать корректность маркировки, указанной сторонним разработчиком, что создаёт риск нарушения закона.</p>
+            <p>📜 <b>Федеральный закон от 13.03.2006 № 38-ФЗ «О рекламе»</b> — регулирует распространение рекламы. Сторонние игры могут содержать скрытую рекламу или недобросовестные механики, за которые платформа может быть привлечена к ответственности как распространитель.</p>
+            <p>📜 <b>Статьи 146, 146.1 Уголовного кодекса РФ</b> — предусматривают уголовную ответственность за нарушение авторских и смежных прав в крупном размере. Платформа, способствующая распространению контрафактного контента, рискует попасть под действие данных статей.</p>
+            <p>📜 <b>Кодекс РФ об административных правонарушениях (ст. 7.12, 13.11, 14.3, 15.41 КоАП РФ)</b> — устанавливает административную ответственность за нарушение авторских прав, законодательства о персональных данных, рекламы и защиты потребителей.</p>
+            <p>Таким образом, решение о прекращении приёма сторонних игр является <b>вынужденной мерой</b>, направленной на исключение правовых рисков и обеспечение полной юридической чистоты публикуемого контента. С момента вступления данного решения в силу на платформе MAYRUN Store публикуются исключительно игры, разработанные студией <b>MYRUNPLAY&gt;_</b>, что гарантирует полное соблюдение всех требований законодательства Российской Федерации.</p>
           </div></div></div>
         </div>
 
@@ -893,6 +1860,24 @@ html[data-theme="dark"] .mbi-badge .mbi-text{color:#f3f3f5}
 
     <section class="page" id="page-admin" hidden>
       <div class="page-head"><h1>Админ-панель</h1><p>Управление играми, новостями и отзывами</p></div>
+
+      <div class="admin-section">
+        <h3>Настройки главного баннера</h3>
+        <p style="margin:0 0 14px;color:var(--text-dim);font-size:14px">Загрузите фоновое изображение для баннера на главной странице. Рекомендуемый размер: <b>1200×400</b> или больше. Формат: JPG, PNG, WebP.</p>
+        <div class="banner-preview" id="bannerPreview">
+          <div class="banner-preview-text">MYRUN Store</div>
+        </div>
+        <form id="bannerForm">
+          <div class="form-group">
+            <label class="form-label">Фоновое изображение баннера</label>
+            <input type="file" class="form-input" id="bannerImage" accept="image/*">
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button type="submit" class="btn btn-primary">Загрузить изображение</button>
+            <button type="button" class="btn btn-ghost" id="removeBannerBtn">Удалить фон</button>
+          </div>
+        </form>
+      </div>
 
       <div class="admin-section">
         <h3>Загрузить новую игру</h3>
@@ -1091,7 +2076,7 @@ let isAdmin = false;
 let currentRating = 0;
 let selectedDevice = null;
 let selectedGameType = 'EXE';
-const PAGE_ORDER = ['home', 'news', 'rules', 'faq'];
+const PAGE_ORDER = ['home', 'news', 'why', 'rules', 'faq'];
 
 function mbiBadgeHTML(){
   return `<div class="mbi-badge">
@@ -1216,7 +2201,6 @@ function checkForNewNews(newsItems){
   } catch(e){}
   
   if(!lastViewed){
-    // Первый запуск — считаем, что всё просмотрено, точку не показываем
     try {
       const latestDate = newsItems.reduce((max, n) => {
         const d = new Date(n.created_at).getTime();
@@ -1371,6 +2355,7 @@ function showAdminPanel(){
   document.getElementById('page-admin').hidden = false;
   document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
   loadAdminData();
+  loadBannerPreview();
 }
 
 document.getElementById('logoutBtn').addEventListener('click', async function(){
@@ -1439,6 +2424,97 @@ document.getElementById('reviewForm').addEventListener('submit', async function(
     loadGames();
     if(isAdmin) loadAdminData();
   } catch(err){ alert('Ошибка: ' + err.message); }
+});
+
+async function loadBannerBackground(){
+  const banner = document.getElementById('storeBanner');
+  if(!banner || !supabaseClient) return;
+  try {
+    const { data, error } = await supabaseClient
+      .from('settings')
+      .select('value')
+      .eq('key', 'banner_bg')
+      .maybeSingle();
+    if(!error && data && data.value){
+      banner.style.backgroundImage = `url("${data.value}")`;
+      banner.classList.add('has-bg');
+    }
+  } catch(e){
+    console.error('Banner load error:', e);
+  }
+}
+
+async function loadBannerPreview(){
+  const preview = document.getElementById('bannerPreview');
+  if(!preview || !supabaseClient) return;
+  try {
+    const { data, error } = await supabaseClient
+      .from('settings')
+      .select('value')
+      .eq('key', 'banner_bg')
+      .maybeSingle();
+    if(!error && data && data.value){
+      preview.style.backgroundImage = `url("${data.value}")`;
+      preview.classList.add('has-bg');
+    } else {
+      preview.style.backgroundImage = '';
+      preview.classList.remove('has-bg');
+    }
+  } catch(e){
+    console.error('Banner preview error:', e);
+  }
+}
+
+document.getElementById('bannerForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  if(!supabaseClient){ alert('Ошибка подключения'); return; }
+  
+  const file = document.getElementById('bannerImage').files[0];
+  if(!file){ alert('Выберите изображение'); return; }
+  
+  try {
+    const fileName = `banner_${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+    const { error: uploadError } = await supabaseClient.storage.from('game-covers').upload(fileName, file, { upsert: true });
+    if(uploadError){ alert('Ошибка загрузки: ' + uploadError.message); return; }
+    
+    const { data: urlData } = supabaseClient.storage.from('game-covers').getPublicUrl(fileName);
+    const publicUrl = urlData.publicUrl;
+    
+    const { data: existing } = await supabaseClient
+      .from('settings')
+      .select('id')
+      .eq('key', 'banner_bg')
+      .maybeSingle();
+    
+    if(existing){
+      const { error } = await supabaseClient.from('settings').update({ value: publicUrl }).eq('key', 'banner_bg');
+      if(error){ alert('Ошибка сохранения: ' + error.message); return; }
+    } else {
+      const { error } = await supabaseClient.from('settings').insert({ key: 'banner_bg', value: publicUrl });
+      if(error){ alert('Ошибка сохранения: ' + error.message); return; }
+    }
+    
+    alert('Фон баннера обновлён!');
+    document.getElementById('bannerImage').value = '';
+    loadBannerBackground();
+    loadBannerPreview();
+  } catch(err){
+    alert('Ошибка: ' + err.message);
+  }
+});
+
+document.getElementById('removeBannerBtn').addEventListener('click', async function(){
+  if(!confirm('Удалить фоновое изображение баннера? Будет восстановлен стандартный фон.')) return;
+  if(!supabaseClient) return;
+  try {
+    const { error } = await supabaseClient.from('settings').delete().eq('key', 'banner_bg');
+    if(error){ alert('Ошибка: ' + error.message); return; }
+    alert('Фон баннера удалён');
+    loadBannerBackground();
+    loadBannerPreview();
+  } catch(err){
+    alert('Ошибка: ' + err.message);
+  }
 });
 
 async function loadGames(){
@@ -1770,13 +2846,8 @@ document.addEventListener('DOMContentLoaded', function(){
   initDeviceSelect();
   loadGames();
   loadNews();
+  loadBannerBackground();
 });
-</script>
-</body>
-</html>
-
-<script>
-  const ADMIN_USER_ID = 'f6ae17ca-8f5f-439f-a13d-02c4d1eb615c';
 </script>
 </body>
 </html>
